@@ -89,16 +89,16 @@ class LoginForm extends Component {
     }
 
     handleSubmit(event) {
-        event.preventDefault();   
+        event.preventDefault();
 
         const loginRequest = Object.assign({}, this.state);
 
         login(loginRequest)
         .then(response => {
             localStorage.setItem(ACCESS_TOKEN, response.accessToken);
-            window.location.reload();
-            /* this.props.history.push("/");
-            Alert.success("You're successfully logged in!"); */
+            this.props.history.push("/");
+            this.props.onLogin();
+            setTimeout(function () { Alert.success("You're successfully logged in!") }, 300);
         }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
         });
