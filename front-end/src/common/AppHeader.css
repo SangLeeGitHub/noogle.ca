@@ -7,7 +7,10 @@
 .app-title {
     line-height: 60px;
     vertical-align: middle;
-    font-size: 1.35em;
+    font-size: 1.5em;
+    font-family: "GungSeo";
+    font-weight: bolder;
+    color: darkblue;
 }
 
 .app-branding {
@@ -30,18 +33,35 @@
 }
 
 .app-nav ul li a {
-    display: inline-block;
     line-height: 60px;
     vertical-align: middle;
-    padding-left: 15px;
-    padding-right: 15px;
-    color: rgba(0,0,0,0.65);
+    color: white;
+    padding: 10px;
+    margin: 5px;
+    height: 38px;
+}
+
+.app-nav ul li button {
+    vertical-align: middle;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 5px;
+    height: 38px;
+    text-transform: none;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .app-nav ul li a:hover {
-    color: #0f96f6;
+    background-color: grey;
 }
 
 .app-nav ul li a.active {
     color: #0f96f6;
+}
+
+.app-top-box {
+    background-color: darkorange;
 }

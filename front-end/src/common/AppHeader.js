@@ -1,33 +1,36 @@
 import React, { Component } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import {Link, NavLink, Switch, withRouter} from 'react-router-dom';
 import './AppHeader.css';
+import { PinkButton } from '../app/App.js'
 
 class AppHeader extends Component {
+
     render() {
+
         return (
             <header className="app-header">
                 <div className="container">
                     <div className="app-branding">
-                        <Link to="/" className="app-title">Spring Social</Link>
+                        <Link to="/" className="app-title">누굴까?</Link>
                     </div>
                     <div className="app-options">
                         <nav className="app-nav">
                                 { this.props.authenticated ? (
                                     <ul>
                                         <li>
-                                            <NavLink to="/profile">Profile</NavLink>
+                                            <PinkButton component={Link} to="/profile">Profile</PinkButton>
                                         </li>
                                         <li>
-                                            <a onClick={this.props.onLogout}>Logout</a>
+                                            <PinkButton onClick={this.props.onLogout}>Logout</PinkButton>
                                         </li>
                                     </ul>
                                 ): (
                                     <ul>
                                         <li>
-                                            <NavLink to="/login">Login</NavLink>        
+                                            <PinkButton component={Link} to="/login">Login</PinkButton>
                                         </li>
                                         <li>
-                                            <NavLink to="/signup">Signup</NavLink>        
+                                            <PinkButton component={Link} to="/signup">Signup</PinkButton>
                                         </li>
                                     </ul>
                                 )}

@@ -104,13 +104,13 @@ a:hover {
 
 .btn-primary {
     color: #fff;
-    background-color: #2098f3;
-    border-color: #2098f3;  
+    background-color: orangered;
+    border-color: orangered;
 } 
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
-  background-color: #40a9ff;
-  border-color: #40a9ff;
+  background-color: orangered;
+  border-color: orangered;
 }
 
 .btn-success {
