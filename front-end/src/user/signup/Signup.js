@@ -108,10 +108,12 @@ class SignupForm extends Component {
                 <div className="form-item">
                     <PinkButton type="submit">Sign Up</PinkButton>
                 </div>
+                
             </form>                    
 
         );
     }
 }
 
-export default Signup
+export default Signup;
+export {SignupForm} 

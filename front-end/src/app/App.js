@@ -17,6 +17,7 @@ import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 import './App.css';
 import { styled } from "@material-ui/styles";
 import { Button } from "@material-ui/core";
+import UpdateProfile from '../user/profile/UpdateProfile';
 
 class App extends Component {
 
@@ -68,7 +69,7 @@ class App extends Component {
     if(this.state.loading) {
       return <LoadingIndicator />
     }
-
+    console.log("앱.js"+ this.state.authenticated);
     return (
       <div className="app">
         <div className="app-top-box">
@@ -77,8 +78,11 @@ class App extends Component {
         <div className="app-body">
           <Switch>
             <Route exact path="/" component={Home}></Route>
+            {/* <PrivateRoute exact path="/profile/updateProfile" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
+              component={UpdateProfile}></PrivateRoute> */}
             <PrivateRoute path="/profile" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
               component={Profile}></PrivateRoute>
+
             <Route path="/login"
               render={(props) => <Login authenticated={this.state.authenticated} onLogin={this.loadCurrentlyLoggedInUser} {...props} />}></Route>
             <Route path="/signup"
