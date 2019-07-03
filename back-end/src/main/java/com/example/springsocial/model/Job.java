@@ -21,7 +21,7 @@ public class Job {
     private Long cId;
     
     @Column(nullable = true)
-    private String desc;
+    private String description;
 
     @Column(nullable = true)
     private String url;
@@ -53,12 +53,12 @@ public class Job {
 		this.cId = cId;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getUrl() {

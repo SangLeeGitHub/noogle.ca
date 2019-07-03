@@ -61,7 +61,7 @@ public class JobController {
 	    
 	    job.setPosition(createJobRequest.getPosition());
 	    job.setcId(createJobRequest.getcId());
-	    job.setDesc(createJobRequest.getDesc());
+	    job.setDescription(createJobRequest.getDescription());
 	    job.setUrl(createJobRequest.getUrl());
 	    job.setuId(createJobRequest.getuId());
 	    
