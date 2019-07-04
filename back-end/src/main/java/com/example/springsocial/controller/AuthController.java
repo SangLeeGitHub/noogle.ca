@@ -7,6 +7,7 @@ import com.example.springsocial.payload.ApiResponse;
 import com.example.springsocial.payload.AuthResponse;
 import com.example.springsocial.payload.LoginRequest;
 import com.example.springsocial.payload.SignUpRequest;
+import com.example.springsocial.payload.UpdateRequest;
 import com.example.springsocial.repository.UserRepository;
 import com.example.springsocial.security.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
@@ -77,6 +79,30 @@ public class AuthController {
 
         return ResponseEntity.created(location)
                 .body(new ApiResponse(true, "User registered successfully@"));
+    }
+    @PutMapping("/updateinfo")
+    public ResponseEntity<?> updateUser(@Valid @RequestBody UpdateRequest updaterequest){
+    	if(!userRepository.existsByEmail(updaterequest.getEmail())) {
+    		throw new BadRequestException("Email Address is not valid");
+    	}
+    	//Update user's information
+    	Optional<User> optionaluser = userRepository.findByEmail(updaterequest.getEmail());
+    	User toUpdateUser = optionaluser.get();
+    	
+    	toUpdateUser.setName(updaterequest.getName());
+    	toUpdateUser.setPassword(updaterequest.getPassword());
+    	toUpdateUser.setPassword(passwordEncoder.encode(toUpdateUser.getPassword()));    	
+    	User result = userRepository.save(toUpdateUser);
+    	
+    	URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath().path("/user/me")
+                .buildAndExpand(result.getId()).toUri();
+
+        return ResponseEntity.created(location)
+                .body(new ApiResponse(true, "User Information successfully updated@"));
+    	
+
+        
     }
 
 }

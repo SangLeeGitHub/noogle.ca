@@ -34,6 +34,17 @@ export function getCurrentUser() {
     });
 }
 
+export function getJobLists(){
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+
+    return request({
+        url: API_BASE_URL + "/job",
+        method: 'GET'
+    });
+}
+
 export function login(loginRequest) {
     return request({
         url: API_BASE_URL + "/auth/login",
@@ -47,5 +58,13 @@ export function signup(signupRequest) {
         url: API_BASE_URL + "/auth/signup",
         method: 'POST',
         body: JSON.stringify(signupRequest)
+    });
+}
+
+export function updateInfo(updateRequest) {
+    return request({
+        url: API_BASE_URL + "/auth/updateinfo",
+        method: 'PUT',
+        body: JSON.stringify(updateRequest)
     });
 }

@@ -6,17 +6,26 @@ import { PinkButton } from '../app/App.js'
 class AppHeader extends Component {
 
     render() {
-
+        const style1 = {
+            "background-color": "#ffffff"
+        };
+        const style2 = {
+            "background-color": "#000000"
+        };
         return (
-            <header className="app-header">
-                <div className="container">
-                    <div className="app-branding">
-                        <Link to="/" className="app-title">누굴까?</Link>
-                    </div>
-                    <div className="app-options">
-                        <nav className="app-nav">
-                                { this.props.authenticated ? (
+
+                <header className="app-header">
+                    <div className="container">
+                        <div className="app-branding">
+                            <Link to="/" className="app-title">누굴까?</Link>
+                        </div>
+                        <div className="app-options">
+                            <nav className="app-nav">
+                                {this.props.authenticated ? (
                                     <ul>
+                                        <li>
+                                            <PinkButton component={Link} to="/job">My Job</PinkButton>
+                                        </li>
                                         <li>
                                             <PinkButton component={Link} to="/profile">Profile</PinkButton>
                                         </li>
@@ -24,22 +33,23 @@ class AppHeader extends Component {
                                             <PinkButton onClick={this.props.onLogout}>Logout</PinkButton>
                                         </li>
                                     </ul>
-                                ): (
-                                    <ul>
-                                        <li>
-                                            <PinkButton component={Link} to="/login">Login</PinkButton>
-                                        </li>
-                                        <li>
-                                            <PinkButton component={Link} to="/signup">Signup</PinkButton>
-                                        </li>
-                                    </ul>
-                                )}
-                        </nav>
+                                ) : (
+                                        <ul>
+                                            <li>
+                                                <PinkButton component={Link} to="/login">Login</PinkButton>
+                                            </li>
+                                            <li>
+                                                <PinkButton component={Link} to="/signup">Signup</PinkButton>
+                                            </li>
+                                        </ul>
+                                    )}
+                            </nav>
+                        </div>
                     </div>
-                </div>
-            </header>
+                </header>
+
         )
     }
 }
 
-export default AppHeader;
+export default withRouter(AppHeader);
