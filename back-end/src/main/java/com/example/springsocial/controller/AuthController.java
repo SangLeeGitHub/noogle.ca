@@ -91,7 +91,7 @@ public class AuthController {
     	
     	toUpdateUser.setName(updaterequest.getName());
     	toUpdateUser.setPassword(updaterequest.getPassword());
-    	    	
+    	toUpdateUser.setPassword(passwordEncoder.encode(toUpdateUser.getPassword()));    	
     	User result = userRepository.save(toUpdateUser);
     	
     	URI location = ServletUriComponentsBuilder

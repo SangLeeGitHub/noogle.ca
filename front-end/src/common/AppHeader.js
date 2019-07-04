@@ -24,6 +24,9 @@ class AppHeader extends Component {
                                 {this.props.authenticated ? (
                                     <ul>
                                         <li>
+                                            <PinkButton component={Link} to="/job">My Job</PinkButton>
+                                        </li>
+                                        <li>
                                             <PinkButton component={Link} to="/profile">Profile</PinkButton>
                                         </li>
                                         <li>

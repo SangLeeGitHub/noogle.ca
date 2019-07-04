@@ -33,8 +33,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/job")
-
-
 public class JobController {
 	
     @Autowired
@@ -42,9 +40,10 @@ public class JobController {
     
     private List<Job> jobList;
     
-    // @PreAuthorize("hasRole('USER')")
-    @GetMapping("/jobList")
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("")
     public List<Job> getJobList() {
+    	System.out.println("----------------------- /job");
         return jobRepository.findAll();
         		//.orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
     }
@@ -55,6 +54,7 @@ public class JobController {
 //	    if(jobRepository.existsByEmail(signUpRequest.getEmail())) {
 //	        throw new BadRequestException("Email address already in use.");
 //	    }
+    	System.out.println("----------------------- /job/createJob");
 
 	    // Creating job
 	    Job job = new Job();
