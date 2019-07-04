@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import {Link, Route, Switch} from 'react-router-dom';
 import '../user/signup/Signup.css';
-// import CreateJobComponent from './CreateJobComponent';
-// import JobDetailComponent from './JobDetailComponent';
+import PrivateRoute from '../common/PrivateRoute';
 import {CreateJobComponent, JobDetailComponent} from '.';
 import {getJobLists,getCurrentUser } from '../util/APIUtils';
 import Alert from 'react-s-alert';
 import {PinkButton} from '../app/App';
-import NotFound from '../common/NotFound';
+
 
 
 class JobListComponent extends Component{
@@ -55,8 +54,12 @@ class JobListComponent extends Component{
     render(){
 
         
-        const currentPath = this.props.match.url;
+        // const currentPath = this.props.match.url;
+        const currentPath = `${this.props.match.url}`;
         const jobLists = this.state.jobLists;
+
+        console.log("currentPath:", currentPath);
+
         return(
             <div className="signup-container">
                 <div>
@@ -64,10 +67,11 @@ class JobListComponent extends Component{
                 </div>
                 <div>
                     <PinkButton component={Link} to={`${currentPath}/jobdetail`}>Job Detail</PinkButton> &nbsp;&nbsp;
-                    <PinkButton component={Link} to="/job/createjob">Create a new Job</PinkButton> &nbsp;&nbsp;
-
-                    {/* <Link component={JobDetailComponent} to={`${currentPath}/jobdetail`}>Job Detail</Link> &nbsp;&nbsp;
-                    <Link component={CreateJobComponent} to={`${currentPath}/createjob`}>Add a Job</Link> &nbsp;&nbsp; */}
+                    <PinkButton component={Link} to={`${currentPath}/jobdetail/1`}>Job Detail</PinkButton> &nbsp;&nbsp;
+                    <PinkButton component={Link} to={`${currentPath}/createjob`}>Create a new Job</PinkButton> &nbsp;&nbsp;
+                   {/* <Link to={currentPath + "/jobdetail/1"}> job detail</Link> <br />
+                   <Link to={currentPath + "/createjob"}> Create a New Job</Link> <br />
+                   <Link to={currentPath + "/createjob/form"}>Form</Link> */}
                     <hr />
                 </div>
 
@@ -98,20 +102,16 @@ class JobListComponent extends Component{
 
                     </tbody>
                 </table>
-                {/* <hr />
-                            <CreateJobComponent />
-                            <JobDetailComponent /> */}
+
                 <hr />
-                <Route exact={true} path={currentPath+"/"} render={() => <div><h3>Job Details</h3></div>} />
-                <Route path={`${currentPath}/jobdetail`} component={JobDetailComponent}></Route>
-                <Route path={`${currentPath}/createjob`} component={CreateJobComponent}></Route>
-
-
-
+                <Route exact path={`${currentPath}/jobdetail`} render={() => <div><h1>Job Details</h1></div>}></Route>
+                <Route path={`${currentPath}/jobdetail/:jobId`} component={JobDetailComponent}></Route>
+                <Route path={`${currentPath}/createjob`} authenticated={this.state.authenticated} 
+                currentUser={this.state.currentUser} component={CreateJobComponent} ></Route>
 {/* 
-                {console.log(this.props.match.url)}
-                {this.props.match.url} */}
-
+                <Route exact path={currentPath} render={() => <div><h3>[ Job Lists ]</h3></div>} />
+                <Route path={`${currentPath}/jobdetail/:jobId`} component={JobDetailComponent} />
+                <Route path={`${currentPath}/createjob`} component={CreateJobComponent} /> */}
 
 
 

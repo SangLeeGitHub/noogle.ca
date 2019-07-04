@@ -72,7 +72,7 @@ public class JobController {
 	            .buildAndExpand(result.getJobId()).toUri();
 
 	    return ResponseEntity.created(location)
-	            .body(new ApiResponse(true, "User registered successfully@"));
+	            .body(new ApiResponse(true, "Job added successfully@"));
 	}
 
 }
