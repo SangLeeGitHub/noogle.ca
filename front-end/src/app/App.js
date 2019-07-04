@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, Switch, withRouter, BrowserRouter as Router} from 'react-router-dom';
+import {Route, Switch, withRouter} from 'react-router-dom';
 import AppHeader from '../common/AppHeader';
 import Home from '../home/Home';
 import Login from '../user/login/Login';
@@ -70,29 +70,27 @@ class App extends Component {
     }
 
     return (
-      <Router>
-        <div className="app">
-          <div className="app-top-box">
-            <AppHeader authenticated={this.state.authenticated} onLogout={this.handleLogout} />
-          </div>
-          <div className="app-body">
-              <Switch>
-                <Route exact path="/" component={Home}></Route>
-                <PrivateRoute path="/profile" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
-                  component={Profile}></PrivateRoute>
-                <Route path="/login"
-                  render={(props) => <Login authenticated={this.state.authenticated} onLogin={this.loadCurrentlyLoggedInUser} {...props} />}></Route>
-                <Route path="/signup"
-                  render={(props) => <Signup authenticated={this.state.authenticated} {...props} />}></Route>
-                <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}></Route>
-                <Route component={NotFound}></Route>
-              </Switch>
-          </div>
-          <Alert stack={{limit: 3}}
-            timeout = {3000}
-            position='top-right' effect='slide' offset={65} />
+      <div className="app">
+        <div className="app-top-box">
+          <AppHeader authenticated={this.state.authenticated} onLogout={this.handleLogout} />
         </div>
-      </Router>
+        <div className="app-body">
+          <Switch>
+            <Route exact path="/" component={Home}></Route>
+            <PrivateRoute path="/profile" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
+              component={Profile}></PrivateRoute>
+            <Route path="/login"
+              render={(props) => <Login authenticated={this.state.authenticated} onLogin={this.loadCurrentlyLoggedInUser} {...props} />}></Route>
+            <Route path="/signup"
+              render={(props) => <Signup authenticated={this.state.authenticated} {...props} />}></Route>
+            <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}></Route>
+            <Route component={NotFound}></Route>
+          </Switch>
+        </div>
+        <Alert stack={{limit: 3}} 
+          timeout = {3000}
+          position='top-right' effect='slide' offset={65} />
+      </div>
     );
   }
 }
@@ -107,4 +105,4 @@ export const PinkButton = styled(Button)({
   padding: '0 30px',
 });
 
-export default App;
+export default withRouter(App);
