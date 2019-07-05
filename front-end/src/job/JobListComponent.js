@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {Link, Route, Switch} from 'react-router-dom';
+import {Link, Route, withRouter,Switch} from 'react-router-dom';
 import '../user/signup/Signup.css';
 import PrivateRoute from '../common/PrivateRoute';
 import {CreateJobComponent, JobDetailComponent} from '.';
 import {getJobLists,getCurrentUser } from '../util/APIUtils';
 import Alert from 'react-s-alert';
 import {PinkButton} from '../app/App';
+
 
 
 
@@ -26,9 +27,9 @@ class JobListComponent extends Component{
             jobLists: 
             [
                 {jobId: 10, description : 'Learn to Dance', position: "Software Developer 1", cId: 51, uId: 15, url: "http://www.askall.ca" , jobdate:""},
-                {jobId: 20, description : 'hello 2', position: "Tester 2", cId: 10, uId: 5, url: "http://www.askall.ca2" ,jobdate:""},
+                {jobId: 20, description : 'hello 2', position: "Tester 2", cId: 10, uId: 6, url: "http://www.askall.ca2" ,jobdate:""},
                 {jobId: 30, description : '접니다 3', position: "Developer 3", cId: 10, uId: 15, url: "http://www.askall.ca3" ,jobdate:""},
-                {jobId: 40, description : '나여~ 4', position: "Embedded Developer 4", cId: 21, uId: 25, url: "http://www.askall.ca4" ,jobdate:""},
+                {jobId: 40, description : '나여~ 4', position: "Embedded Developer 4", cId: 21, uId: 6, url: "http://www.askall.ca4" ,jobdate:""},
                 {jobId: 50, description : '저라니깨여 5', position: "App Developer 5", cId: 31, uId: 35, url: "http://www.askall.ca5" ,jobdate:""}
             ] 
         };
@@ -64,14 +65,11 @@ class JobListComponent extends Component{
             <div className="signup-container">
                 <div>
                     <h1>{this.props.currentUser.name}'s Job Lists</h1>
+                    {currentPath}
                 </div>
                 <div>
                     <PinkButton component={Link} to={`${currentPath}/jobdetail`}>Job Detail</PinkButton> &nbsp;&nbsp;
-                    <PinkButton component={Link} to={`${currentPath}/jobdetail/1`}>Job Detail</PinkButton> &nbsp;&nbsp;
                     <PinkButton component={Link} to={`${currentPath}/createjob`}>Create a new Job</PinkButton> &nbsp;&nbsp;
-                   {/* <Link to={currentPath + "/jobdetail/1"}> job detail</Link> <br />
-                   <Link to={currentPath + "/createjob"}> Create a New Job</Link> <br />
-                   <Link to={currentPath + "/createjob/form"}>Form</Link> */}
                     <hr />
                 </div>
 
@@ -104,14 +102,16 @@ class JobListComponent extends Component{
                 </table>
 
                 <hr />
-                <Route exact path={`${currentPath}/jobdetail`} render={() => <div><h1>Job Details</h1></div>}></Route>
-                <Route path={`${currentPath}/jobdetail/:jobId`} component={JobDetailComponent}></Route>
-                <Route path={`${currentPath}/createjob`} authenticated={this.state.authenticated} 
-                currentUser={this.state.currentUser} component={CreateJobComponent} ></Route>
-{/* 
-                <Route exact path={currentPath} render={() => <div><h3>[ Job Lists ]</h3></div>} />
-                <Route path={`${currentPath}/jobdetail/:jobId`} component={JobDetailComponent} />
-                <Route path={`${currentPath}/createjob`} component={CreateJobComponent} /> */}
+
+                <Switch>
+                    {/* <Route exact path={`${currentPath}/createjob`}
+                        render={(props) => <CreateJobComponent  {...props} currentUser={this.props.currentUser} />} /> */}
+                    {/* <Route path={`${currentPath}`}
+                        render={(props) => <JobListComponent  {...props} currentUser={this.props.currentUser} />} /> */}
+                    <Route exact path={`${currentPath}/jobdetail`} render={() => <div><h1>Job Details</h1></div>}></Route>
+                    <Route path={`${currentPath}/jobdetail/:jobId`} currentUser={this.props.currentUser} component={JobDetailComponent}></Route>
+                </Switch>
+
 
 
 
@@ -120,4 +120,4 @@ class JobListComponent extends Component{
     }
 }
 
-export default JobListComponent;
+export default withRouter(JobListComponent);

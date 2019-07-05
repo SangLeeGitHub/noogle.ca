@@ -2,7 +2,8 @@ import { API_BASE_URL, ACCESS_TOKEN } from '../constants';
 
 const request = (options) => {
     const headers = new Headers({
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
+        // 'charset': 'UTF-8'
     })
     
     if(localStorage.getItem(ACCESS_TOKEN)) {
@@ -66,5 +67,14 @@ export function updateInfo(updateRequest) {
         url: API_BASE_URL + "/auth/updateinfo",
         method: 'PUT',
         body: JSON.stringify(updateRequest)
+    });
+}
+
+export function createJob(jobCreationRequest){
+    console.log(jobCreationRequest);
+    return request({
+        url: API_BASE_URL + "/job/createjob",
+        method: 'POST',
+        body: JSON.stringify(jobCreationRequest)
     });
 }
