@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import PrivateRoute from '../../common/PrivateRoute';
-import Profile from './Profile';
-import {SignupForm} from '../signup/Signup'
+import {withRouter} from 'react-router-dom';
 import {updateInfo } from '../../util/APIUtils';
 import Alert from 'react-s-alert';
 import { PinkButton } from "../../app/App";
@@ -26,7 +24,7 @@ class UpdateProfile extends Component{
                     {/* <p className="profile-email">{this.props.currentUser.email}</p> */}
                 </div>
                 <div>
-                    <UpdateForm {...this.props} />
+                    <UpdateForm currentUser= {this.props.currentUser} {...this.props} />
                 </div>
             </div>
         );
@@ -39,7 +37,8 @@ class UpdateForm extends Component {
         this.state = {
             name: '',
             email: '',
-            password: ''
+            password: '',
+            currentUser: props.currentUser
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -66,16 +65,32 @@ class UpdateForm extends Component {
         .then(response => {
             Alert.success("Information is successfully updated. Enjoy!");
             this.setState({
-                name: this.state.name,
+                name:  this.state.name,
                 email: this.state.email,
                 password: this.state.password
             })
-            this.props.history.replace("/profile");
+            this.props.history.replace("/login");
         }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');            
         });
     }
      
+    // static getDerivedStateFromProps(nextProps, prevState) {
+    //     // 여기서는 setState 를 하는 것이 아니라
+    //     // 특정 props 가 바뀔 때 설정하고 설정하고 싶은 state 값을 리턴하는 형태로
+    //     // 사용됩니다.
+        
+    //     if (nextProps.currentUser !== prevState.currentUser) {
+    //         return { currentUser: nextProps.currentUser };
+    //     //   return this.props.history.push("/login");;
+    //     }
+    //     return null; // null 을 리턴하면 따로 업데이트 할 것은 없다라는 의미
+        
+    //   }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     this.props.history.replace("/profile");
+    //     return true;
+    // }
 
     render() {
         return (
@@ -120,4 +135,4 @@ class UpdateForm extends Component {
     }
 }
 
-export default UpdateProfile;
+export default withRouter(UpdateProfile);

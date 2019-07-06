@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link, NavLink, Switch, withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import './AppHeader.css';
 import { PinkButton } from '../app/App.js'
 

@@ -8,8 +8,8 @@ import Profile from '../user/profile/Profile';
 import OAuth2RedirectHandler from '../user/oauth2/OAuth2RedirectHandler';
 import NotFound from '../common/NotFound';
 import LoadingIndicator from '../common/LoadingIndicator';
-import { getJobLists,getCurrentUser } from '../util/APIUtils';
-import { ACCESS_TOKEN } from '../constants';
+import {getCurrentUser } from '../util/APIUtils';
+import {ACCESS_TOKEN } from '../constants';
 import PrivateRoute from '../common/PrivateRoute';
 import Alert from 'react-s-alert';
 import 'react-s-alert/dist/s-alert-default.css';
@@ -17,7 +17,7 @@ import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 import './App.css';
 import { styled } from "@material-ui/styles";
 import { Button } from "@material-ui/core";
-import {JobListComponent, JobDetailComponent} from '../job';
+import {JobListComponent, CreateJobComponent} from '../job';
 
 class App extends Component {
 
@@ -85,8 +85,11 @@ class App extends Component {
             <PrivateRoute path="/profile" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
               component={Profile}></PrivateRoute>
 
+            <PrivateRoute path="/job/createjob" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
+              component={CreateJobComponent}> ></PrivateRoute>
             <PrivateRoute path="/job" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
               component={JobListComponent}> ></PrivateRoute>
+
             <Route path="/login"
               render={(props) => <Login authenticated={this.state.authenticated} onLogin={this.loadCurrentlyLoggedInUser} {...props} />}></Route>
             <Route path="/signup"
