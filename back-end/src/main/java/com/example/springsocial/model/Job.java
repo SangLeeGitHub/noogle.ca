@@ -29,9 +29,14 @@ public class Job {
     @Column(nullable = false)
     private Long uId;
 
-	public Long getJobId() {
+	
+    
+    
+    public Long getJobId() {
 		return jobId;
 	}
+	
+	
 
 	public void setJobId(Long jobId) {
 		this.jobId = jobId;
