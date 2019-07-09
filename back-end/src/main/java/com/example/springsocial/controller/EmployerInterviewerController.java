@@ -24,6 +24,7 @@ import com.example.springsocial.model.Employer;
 import com.example.springsocial.model.Interviewer;
 import com.example.springsocial.payload.ApiResponse;
 import com.example.springsocial.payload.CreateEmployerRequest;
+import com.example.springsocial.payload.CreateInterviewerRequest;
 import com.example.springsocial.service.EmployerService;
 import com.example.springsocial.service.InterviewerService;
 
@@ -60,7 +61,7 @@ public class EmployerInterviewerController {
 	
 	@PostMapping("/createEmployer")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<?> createPoll(@RequestBody CreateEmployerRequest createEmployerRequest) {
+    public ResponseEntity<?> createEmployer(@RequestBody CreateEmployerRequest createEmployerRequest) {
         Employer employer = employerService.createEmployer(createEmployerRequest);
 
         URI location = ServletUriComponentsBuilder
@@ -78,10 +79,27 @@ public class EmployerInterviewerController {
 		return interviewerService.getAllInterviewers();
 	}
 	
+//	@PostMapping("/{employerId}/createInterviewer")
+//	public Interviewer createInterviewer(@PathVariable(value="employerId") Long employerId, @RequestBody Interviewer interviewer) {
+//		return interviewerService.createInterviewer(employerId, interviewer);
+//	}
+//	
+	
 	@PostMapping("/{employerId}/createInterviewer")
-	public Interviewer createInterviewer(@PathVariable(value="employerId") Long employerId, @RequestBody Interviewer interviewer) {
-		return interviewerService.createInterviewer(employerId, interviewer);
-	}
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<?> createInterviewer(@PathVariable(value="employerId") Long employerId, @RequestBody CreateInterviewerRequest createInterviewerRequest) {
+        Interviewer interviewer = interviewerService.createInterviewer(employerId, createInterviewerRequest);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest().path("getAllInterviewers")
+                .buildAndExpand(interviewer.getId()).toUri();
+
+        return ResponseEntity.created(location)
+                .body(new ApiResponse(true, "Interviewer Created Successfully@"));
+    }
+	
+	
+	
 	
 	@GetMapping("/interviewer/{interviewerId}")
 	public Optional<Interviewer> getInterviewerById(@PathVariable(value="interviewerId") Long interviewerId){

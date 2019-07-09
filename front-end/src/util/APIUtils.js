@@ -87,3 +87,14 @@ export function createEmployer(employerCreationRequest){
         body: JSON.stringify(employerCreationRequest)
     });
 }
+
+
+export function createInterviewer( employerId ,interviewerCreationRequest){
+    console.log(interviewerCreationRequest);
+    // const employerId = interviewerCreationRequest.employerId;
+    return request({
+        url: API_BASE_URL + "/api/" + employerId + "/createInterviewer",
+        method: 'POST',
+        body: JSON.stringify(interviewerCreationRequest)
+    });
+}

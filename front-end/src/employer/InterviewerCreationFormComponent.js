@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {PinkButton} from '../app/App';
 import Alert from 'react-s-alert';
-import {createEmployer} from '../util/APIUtils';
+import {createInterviewer} from '../util/APIUtils';
 
 
 
@@ -39,11 +39,11 @@ class InterviewerCreationFormComponent extends Component{
         //     // employerId: this.props.employerId
         //     employerId: 2  //임시로 하드코딩
         // })
-        const employerCreationRequest = Object.assign({},  this.state); //{uId: this.props.currentUser.i},
-        createEmployer(employerCreationRequest)
+        const interviewerCreationRequest = Object.assign({},  this.state); //{uId: this.props.currentUser.i},
+        createInterviewer(this.state.employerId, interviewerCreationRequest)
         .then(response => {
-            Alert.success("A New Employer is successfully added.");
-            this.props.history.push("/job");
+            Alert.success("A New Interviewer is successfully added.");
+            this.props.history.push("/job/createjob");
             // this.props.history.push("/login");
         }).catch(error => {
             Alert.error(((error && error.message)) || 'Oops! Something went wrong. Please try again.');
