@@ -41,7 +41,7 @@ export function getJobLists(){
     }
 
     return request({
-        url: API_BASE_URL + "/job",
+        url: API_BASE_URL + "/api/job",
         method: 'GET'
     });
 }
@@ -70,10 +70,10 @@ export function updateInfo(updateRequest) {
     });
 }
 
-export function createJob(jobCreationRequest){
+export function createJob(employerId,jobCreationRequest){
     console.log(jobCreationRequest);
     return request({
-        url: API_BASE_URL + "/job/createjob",
+        url: API_BASE_URL + "/api/" + employerId + "/createJob",
         method: 'POST',
         body: JSON.stringify(jobCreationRequest)
     });

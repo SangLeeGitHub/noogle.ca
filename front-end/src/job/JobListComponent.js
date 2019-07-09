@@ -26,11 +26,13 @@ class JobListComponent extends Component{
         this.state = {
             jobLists: 
             [
-                {jobId: 10, description : 'Learn to Dance', position: "Software Developer 1", cId: 51, uId: 15, url: "http://www.askall.ca" , jobdate:""},
-                {jobId: 20, description : 'hello 2', position: "Tester 2", cId: 10, uId: 6, url: "http://www.askall.ca2" ,jobdate:""},
-                {jobId: 30, description : '접니다 3', position: "Developer 3", cId: 10, uId: 15, url: "http://www.askall.ca3" ,jobdate:""},
-                {jobId: 40, description : '나여~ 4', position: "Embedded Developer 4", cId: 21, uId: 6, url: "http://www.askall.ca4" ,jobdate:""},
-                {jobId: 50, description : '저라니깨여 5', position: "App Developer 5", cId: 31, uId: 35, url: "http://www.askall.ca5" ,jobdate:""}
+                // {jobId: 10, description : 'Learn to Dance', position: "Software Developer 1", cId: 51, uId: 15, url: "http://www.askall.ca" , jobdate:""},
+                // {jobId: 20, description : 'hello 2', position: "Tester 2", cId: 10, uId: 6, url: "http://www.askall.ca2" ,jobdate:""},
+                // {jobId: 30, description : '접니다 3', position: "Developer 3", cId: 10, uId: 15, url: "http://www.askall.ca3" ,jobdate:""},
+                // {jobId: 40, description : '나여~ 4', position: "Embedded Developer 4", cId: 21, uId: 6, url: "http://www.askall.ca4" ,jobdate:""},
+                
+                {createdAt: "2019-07-08T18:33:33Z", position: "App Developer 5", description : 'Default State 1',  employer_name: "LGE", uId: 35, url: "http://www.askall.ca5"},
+                {createdAt: "2019-07-09T18:33:33Z", position: "Game Developer 5", description : 'From Default State 2',  employer_name: "Samsung", uId: 35, url: "http://www.askall.ca5"}
             ] 
         };
     };
@@ -77,9 +79,9 @@ class JobListComponent extends Component{
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>Job ID</th>
+                            <th>Date Created</th>
                             <th>Position</th>
-                            <th>Company Name</th>
+                            <th>Employer Name</th>
                             <th>Job Description</th>
                             <th>User ID</th>
                             <th>URL</th>
@@ -89,9 +91,9 @@ class JobListComponent extends Component{
                         {jobLists.map(
                             job =>
                                 <tr key={job.jobId}>
-                                    <td>{job.jobId}</td>
+                                    <td>{job.createdAt}</td>
                                     <td>{job.position}</td>
-                                    <td>{job.cId}</td>
+                                    <td>{job.employer_name}</td>
                                     <td>{job.description}</td>
                                     <td>{job.uId}</td>
                                     <td>{job.url}</td>

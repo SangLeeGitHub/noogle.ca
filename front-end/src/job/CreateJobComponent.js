@@ -53,7 +53,7 @@ class JobCreationFormComponent extends Component{
         super(props);
         this.state = {
             position: "",
-            cId: "",
+            employerId: 2, //일단 HardCoding
             description: "",
             url: "",
             uId: `${this.props.currentUser.id}`
@@ -80,10 +80,10 @@ class JobCreationFormComponent extends Component{
             uId: this.props.currentUser.id
         })
         const createJobRequest = Object.assign({},  this.state); //{uId: this.props.currentUser.i},
-        createJob(createJobRequest)
+        createJob(this.state.employerId, createJobRequest)
         .then(response => {
             Alert.success("Your job is successfully added.");
-            this.props.history.push("/job");
+            this.props.history.push("/api/job");
             // this.props.history.push("/login");
         }).catch(error => {
             Alert.error(((error && error.message)) || 'Oops! Something went wrong. Please try again.');
@@ -105,11 +105,11 @@ class JobCreationFormComponent extends Component{
                             onChange={this.handleInputChange} required />
                     </div>
                     <div className="form-item">
-                        <p id="profile-name-hint" className="input-hint">
-                            Company Name: <samp>Amazon: 테스트할때는 숫자를 넣어주세요.</samp>. </p>
-                        <input type="text" name="cId"
+                        {/* <p id="profile-name-hint" className="input-hint">
+                            Company Name: <samp>Amazon: 테스트할때는 숫자를 넣어주세요.</samp>. </p> */}
+                        <input type="text" name=""
                             className="form-control" placeholder="300"
-                            value={this.state.cId} onChange={this.handleInputChange} required />
+                            value={this.state.employerId} required />
                     </div>
                     <div className="form-item">
                         <textarea type="text" name="description"
@@ -122,11 +122,11 @@ class JobCreationFormComponent extends Component{
                             className="form-control" placeholder="URL - Job posting"
                             value={this.state.url} onChange={this.handleInputChange} />
                     </div>
-                    <div className="form-item">
+                    {/* <div className="form-item">
                         <input type="text" name="uId"
                             className="form-control" placeholder={this.props.currentUser.id}
                             value={this.state.uId} onChange={this.handleInputChange} disabled />
-                    </div>
+                    </div> */}
                     <div className="form-item">
                         <PinkButton type="submit">Add a Job</PinkButton>
                     </div>
