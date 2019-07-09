@@ -4,6 +4,7 @@ import {Link, withRouter} from 'react-router-dom';
 import Alert from 'react-s-alert';
 import {PinkButton} from '../app/App';
 import {createJob} from '../util/APIUtils';
+import { EmployerSearchComponent, EmployerCreationFormComponent } from '../employer';
 
 class CreateJobComponent extends Component{
     constructor(props){
@@ -12,14 +13,29 @@ class CreateJobComponent extends Component{
     }
     render(){
         return(
-            <div className="signup-container">
-                <div className="signup-content">
-                    <h1>Add a New Job</h1>
-                    <JobCreationFormComponent currentUser={this.props.currentUser} {...this.props}/> 
-                    <span className="login-link">
-                        Do you want to see the job application lists you applied? <br />
-                        <Link to="/job">View Applications</Link>
-                    </span>
+            <div>
+                <div>
+                    <div className="signup-container">
+                        <h1>Add a New Job</h1>
+                        <hr />
+                        <div>
+                            <EmployerSearchComponent currentUser={this.props.currentUser} {...this.props} />
+                        </div>
+                    </div>
+                    <div className="signup-container">
+                        <div>
+                            <EmployerCreationFormComponent currentUser={this.props.currentUser} {...this.props} />
+                        </div>
+                    </div>
+                </div>
+                <div className="signup-container">
+                    <div className="signup-content">
+                        <JobCreationFormComponent currentUser={this.props.currentUser} {...this.props} />
+                        <span className="login-link">
+                            Do you want to see the job application lists you applied? <br />
+                            <Link to="/job">View Applications</Link>
+                        </span>
+                    </div>
                 </div>
             </div>
         );

@@ -12,7 +12,7 @@ import com.example.springsocial.model.Interviewer;
 
 public class CreateEmployerRequest {
 
-	@NotBlank(message="Enter the Employer's Name")
+	@NotBlank
 	private String name;
 	
     @Column(nullable = true)
@@ -23,6 +23,17 @@ public class CreateEmployerRequest {
 	
     @Column(nullable = true)
 	private String country;
+
+    @Column(nullable = true)
+    private Set<Interviewer> interviewers;
+    
+	public Set<Interviewer> getInterviewers() {
+		return interviewers;
+	}
+
+	public void setInterviewers(Set<Interviewer> interviewers) {
+		this.interviewers = interviewers;
+	}
 
 	public String getName() {
 		return name;

@@ -24,6 +24,7 @@ public class Employer implements Serializable {
 	private Long id;
 	
 	@NotBlank(message="Enter the Employer's Name")
+//	@Column(nullable=false)
 	private String name;
 	
     @Column(nullable = true)

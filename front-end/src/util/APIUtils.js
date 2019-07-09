@@ -78,3 +78,12 @@ export function createJob(jobCreationRequest){
         body: JSON.stringify(jobCreationRequest)
     });
 }
+
+export function createEmployer(employerCreationRequest){
+    console.log(employerCreationRequest);
+    return request({
+        url: API_BASE_URL + "/api/createEmployer",
+        method: 'POST',
+        body: JSON.stringify(employerCreationRequest)
+    });
+}
