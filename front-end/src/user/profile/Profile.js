@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
+import {Link, NavLink, Switch, withRouter} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom'; 
 import './Profile.css';
 
 class Profile extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
+        // console.log(this.props);
     }
+
     render() {
+        
         return (
             <div className="profile-container">
                 <div className="container">
@@ -33,4 +37,4 @@ class Profile extends Component {
     }
 }
 
-export default Profile
+export default Profile;

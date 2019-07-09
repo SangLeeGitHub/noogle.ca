@@ -7,6 +7,9 @@ class AppHeader extends Component {
 
     render() {
 
+        // console.log(" header this.props.authenticated: " + this.props.authenticated);
+        // console.log(" header this.props: " + this.props);
+
         return (
             <header className="app-header">
                 <div className="container">
@@ -17,6 +20,9 @@ class AppHeader extends Component {
                         <nav className="app-nav">
                                 { this.props.authenticated ? (
                                     <ul>
+                                        <li>
+                                            <PinkButton component={Link} to="/Job">Job</PinkButton>
+                                        </li>
                                         <li>
                                             <PinkButton component={Link} to="/profile">Profile</PinkButton>
                                         </li>
