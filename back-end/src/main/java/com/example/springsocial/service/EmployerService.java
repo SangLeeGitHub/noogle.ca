@@ -22,6 +22,11 @@ public class EmployerService {
 		return employerRepository.findAll();
 	}
 	
+	public Employer getEmployer(Long employerId) {
+		
+		return employerRepository.findById(employerId).get();
+	}
+	
 	public Employer createEmployer(CreateEmployerRequest createEmployerRequest) {
 		
 		Employer employer = new Employer();
@@ -42,4 +47,6 @@ public class EmployerService {
 
         return employerRepository.save(employer);
 	}
+	
+	
 }

@@ -1,7 +1,9 @@
 package com.example.springsocial.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -14,9 +16,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+
 @Entity
 @Table(name="Employer")
 public class Employer implements Serializable {
+
+	public List<Job> getJobs() {
+		return jobs;
+	}
+
+	public void setJobs(List<Job> jobs) {
+		this.jobs = jobs;
+	}
 
 	@Column(name="ID", nullable=false, length=10)
 	@Id
@@ -39,6 +50,11 @@ public class Employer implements Serializable {
 	
 	@OneToMany(mappedBy = "employer", fetch = FetchType.LAZY)
 	private Set<Interviewer> interviewers = new HashSet<>(); 
+	
+	
+	@OneToMany(mappedBy = "employer", fetch = FetchType.LAZY)
+	private List<Job> jobs = new ArrayList<Job>();
+	
 	
 	public Employer() {
 		

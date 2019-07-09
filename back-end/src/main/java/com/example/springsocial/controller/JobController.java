@@ -15,6 +15,8 @@ import com.example.springsocial.repository.UserRepository;
 import com.example.springsocial.security.CurrentUser;
 import com.example.springsocial.security.TokenProvider;
 import com.example.springsocial.security.UserPrincipal;
+import com.example.springsocial.service.EmployerService;
+import com.example.springsocial.service.JobService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,50 +34,73 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/job")
+@RequestMapping("/api")
 public class JobController {
 	
-    @Autowired
-    private JobRepository jobRepository;
-    
-    private List<Job> jobList;
+	@Autowired
+	EmployerService employerService;
+	
+//    @Autowired
+//    private JobRepository jobRepository;
+
+	@Autowired
+	JobService jobService;
+	
+
     
     @PreAuthorize("hasRole('USER')")
-    @GetMapping("")
+    @GetMapping("/job")
     public List<Job> getJobList() {
     	System.out.println("----------------------- /job");
-        return jobRepository.findAll();
+        return jobService.getAllJobs();
         		//.orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
     }
     
     @PreAuthorize("hasRole('USER')")
-	@PostMapping("/createjob")
-	public ResponseEntity<?> registerJob(@Valid @RequestBody CreateJobRequest createJobRequest) {
-//	    if(jobRepository.existsByEmail(signUpRequest.getEmail())) {
-//	        throw new BadRequestException("Email address already in use.");
-//	    }
-    	System.out.println("----------------------- /job/createJob");
-  
-
-	    // Creating job
-	    Job job = new Job();
-	    
-	    job.setPosition(createJobRequest.getPosition());
-	    job.setcId(createJobRequest.getcId());
-	    job.setDescription(createJobRequest.getDescription());
-	    job.setUrl(createJobRequest.getUrl());
-	    job.setuId(createJobRequest.getuId());
-	    
-	    Job result = jobRepository.save(job);
-
-	    URI location = ServletUriComponentsBuilder
-	            .fromCurrentContextPath().path("/")
-	            .buildAndExpand(result.getJobId()).toUri();
-
-	    return ResponseEntity.created(location)
-	            .body(new ApiResponse(true, "Job added successfully@"));
+	@PostMapping("/{employerId}/createJob")
+	public ResponseEntity<?> createJob(@PathVariable(value="employerId") Long employerId, @RequestBody CreateJobRequest createJobRequest){
+		
+    	Job job = jobService.createJob(employerId, createJobRequest);
+    	
+    	URI location = ServletUriComponentsBuilder
+    			.fromCurrentRequest().path("getAllJobs")
+    			.buildAndExpand(job.getJobId()).toUri();
+		    	
+    	return ResponseEntity.created(location)
+    			.body(new ApiResponse(true, "Job Created Successfully@"));
 	}
+    
+//    @PreAuthorize("hasRole('USER')")
+//	@PostMapping("/createjob")
+//	public ResponseEntity<?> registerJob(@Valid @RequestBody CreateJobRequest createJobRequest) {
+////	    if(jobRepository.existsByEmail(signUpRequest.getEmail())) {
+////	        throw new BadRequestException("Email address already in use.");
+////	    }
+//    	System.out.println("----------------------- /job/createJob");
+//  
+//
+//	    // Creating job
+//	    Job_old job = new Job_old();
+//	    
+//	    job.setPosition(createJobRequest.getPosition());
+//	    job.setcId(createJobRequest.getcId());
+//	    job.setDescription(createJobRequest.getDescription());
+//	    job.setUrl(createJobRequest.getUrl());
+//	    job.setuId(createJobRequest.getuId());
+//	    
+//	    Job_old result = jobRepository.save(job);
+//
+//	    URI location = ServletUriComponentsBuilder
+//	            .fromCurrentContextPath().path("/")
+//	            .buildAndExpand(result.getJobId()).toUri();
+//
+//	    return ResponseEntity.created(location)
+//	            .body(new ApiResponse(true, "Job added successfully@"));
+//	}
 
+    
+    
+    
 }
 
 
