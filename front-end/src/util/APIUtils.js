@@ -35,14 +35,14 @@ export function getCurrentUser() {
     });
 }
 
-export function getJobLists(){
+export function getJobLists(userId){
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
     }
 
     return request({
-        url: API_BASE_URL + "/api/job",
-        method: 'GET'
+        url: API_BASE_URL + "/api/"+ userId + "/job",
+        method: 'GET',
     });
 }
 
@@ -70,10 +70,10 @@ export function updateInfo(updateRequest) {
     });
 }
 
-export function createJob(employerId,jobCreationRequest){
+export function createJob(userId, employerId,jobCreationRequest){
     console.log(jobCreationRequest);
     return request({
-        url: API_BASE_URL + "/api/" + employerId + "/createJob",
+        url: API_BASE_URL + "/api/" + userId + "/" + employerId + "/createJob",
         method: 'POST',
         body: JSON.stringify(jobCreationRequest)
     });
@@ -89,7 +89,7 @@ export function createEmployer(employerCreationRequest){
 }
 
 
-export function createInterviewer( employerId ,interviewerCreationRequest){
+export function createInterviewer(employerId ,interviewerCreationRequest){
     console.log(interviewerCreationRequest);
     // const employerId = interviewerCreationRequest.employerId;
     return request({

@@ -56,7 +56,8 @@ class JobCreationFormComponent extends Component{
             employerId: 2, //일단 HardCoding
             description: "",
             url: "",
-            uId: `${this.props.currentUser.id}`
+            // users_id: `${this.props.currentUser.id}`
+            userId: 1 //일단 HardCoding
         }
         console.log("JobCreationComponent.js의 Props 표시:  " + this.props.currentUser.uId);
 
@@ -77,13 +78,13 @@ class JobCreationFormComponent extends Component{
     handleSubmit(event){
         event.preventDefault();
         this.setState({
-            uId: this.props.currentUser.id
+            users_id: this.props.currentUser.id
         })
         const createJobRequest = Object.assign({},  this.state); //{uId: this.props.currentUser.i},
-        createJob(this.state.employerId, createJobRequest)
+        createJob(this.state.userId, this.state.employerId, createJobRequest)
         .then(response => {
             Alert.success("Your job is successfully added.");
-            this.props.history.push("/api/job");
+            this.props.history.push("/job");
             // this.props.history.push("/login");
         }).catch(error => {
             Alert.error(((error && error.message)) || 'Oops! Something went wrong. Please try again.');
@@ -130,9 +131,6 @@ class JobCreationFormComponent extends Component{
                     <div className="form-item">
                         <PinkButton type="submit">Add a Job</PinkButton>
                     </div>
-                    {this.state.uId + "uId-state"}
-                    <br />
-                    {this.props.currentUser.id + "uId-state"}
                 </form>
             </div>
         )

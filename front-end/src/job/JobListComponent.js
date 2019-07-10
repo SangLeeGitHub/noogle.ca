@@ -31,15 +31,16 @@ class JobListComponent extends Component{
                 // {jobId: 30, description : '접니다 3', position: "Developer 3", cId: 10, uId: 15, url: "http://www.askall.ca3" ,jobdate:""},
                 // {jobId: 40, description : '나여~ 4', position: "Embedded Developer 4", cId: 21, uId: 6, url: "http://www.askall.ca4" ,jobdate:""},
                 
-                {createdAt: "2019-07-08T18:33:33Z", position: "App Developer 5", description : 'Default State 1',  employer_name: "LGE", uId: 35, url: "http://www.askall.ca5"},
-                {createdAt: "2019-07-09T18:33:33Z", position: "Game Developer 5", description : 'From Default State 2',  employer_name: "Samsung", uId: 35, url: "http://www.askall.ca5"}
+                {createdAt: "2019-07-08T18:33:33Z", position: "App Developer 5", description : 'Default State 1',  employer_name: "LGE", url: "http://www.askall.ca5"},
+                {createdAt: "2019-07-09T18:33:33Z", position: "Game Developer 5", description : 'From Default State 2',  employer_name: "Samsung", url: "http://www.askall.ca5"}
             ] 
         };
     };
 
     loadJobLists(){
-        const {jobLists} = this.state;   
-        getJobLists()
+        const {jobLists} = this.state;
+
+        getJobLists(this.props.currentUser.id)
         .then(response => {
           this.setState({
             jobLists: response.concat(...jobLists),
@@ -95,7 +96,7 @@ class JobListComponent extends Component{
                                     <td>{job.position}</td>
                                     <td>{job.employer_name}</td>
                                     <td>{job.description}</td>
-                                    <td>{job.uId}</td>
+                                    <td>{job.userId}</td>
                                     <td>{job.url}</td>
                                 </tr>
                         )}

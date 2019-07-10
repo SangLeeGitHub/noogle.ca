@@ -42,9 +42,22 @@ public class Job extends UserDateAudit implements Serializable{
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Employer employer;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="users_id", nullable = false)
+    private User user;
 
 	public Long getJobId() {
 		return jobId;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+	@JsonIgnore
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 

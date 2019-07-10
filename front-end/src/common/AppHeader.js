@@ -4,6 +4,12 @@ import './AppHeader.css';
 import { PinkButton } from '../app/App.js'
 
 class AppHeader extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            currentUserId: this.props.currentUserId
+        }
+    }
 
     render() {
         const style1 = {
@@ -12,6 +18,7 @@ class AppHeader extends Component {
         const style2 = {
             "background-color": "#000000"
         };
+        // console.log("AppHeader.js의 State 표시: " + this.state.currentUser.id);
         return (
 
                 <header className="app-header">

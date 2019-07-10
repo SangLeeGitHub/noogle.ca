@@ -15,7 +15,8 @@ class InterviewerCreationFormComponent extends Component{
             email: "",
             phone: "",
             dept: "",
-            employerId: 2 //임시로 하드 코딩 this.props.employerId
+            employerId: 2, //임시로 하드 코딩 this.props.employerId
+            userId: 1 //임시로 하드코딩
         }
         console.log("InterviewerCreationFormComponent.js의 Props 표시:  " + this.props.currentUser.uId);
 
@@ -94,6 +95,7 @@ class InterviewerCreationFormComponent extends Component{
                                 className="form-control" 
                                 value={this.state.employerId} />
                         </div>
+
 
                         <div className="form-item">
                             <PinkButton type="submit">Add an Interviewer</PinkButton>

@@ -1,6 +1,9 @@
 package com.example.springsocial.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -32,8 +35,19 @@ public class User {
     @NotNull
     @Enumerated(EnumType.STRING)
     private AuthProvider provider;
+    
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private List<Job> jobs = new ArrayList<Job>();
 
-    private String providerId;
+    public List<Job> getJobs() {
+		return jobs;
+	}
+
+	public void setJobs(List<Job> jobs) {
+		this.jobs = jobs;
+	}
+
+	private String providerId;
 
     public Long getId() {
         return id;

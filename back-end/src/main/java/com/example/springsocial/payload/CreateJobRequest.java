@@ -17,7 +17,16 @@ public class CreateJobRequest {
     
     private String url;
     
+    @NotBlank
+    private Long userId;
 
+	public Long getUsers_id() {
+		return userId;
+	}
+
+	public void setUsers_id(Long userId) {
+		this.userId = userId;
+	}
 
 	public String getPosition() {
 		return position;

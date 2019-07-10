@@ -8,34 +8,27 @@ import com.example.springsocial.model.User;
 import com.example.springsocial.payload.ApiResponse;
 import com.example.springsocial.payload.AuthResponse;
 import com.example.springsocial.payload.CreateJobRequest;
-import com.example.springsocial.payload.LoginRequest;
-import com.example.springsocial.payload.SignUpRequest;
-import com.example.springsocial.repository.JobRepository;
+import com.example.springsocial.payload.JobListRequest;
 import com.example.springsocial.repository.UserRepository;
-import com.example.springsocial.security.CurrentUser;
-import com.example.springsocial.security.TokenProvider;
-import com.example.springsocial.security.UserPrincipal;
+
+
+
 import com.example.springsocial.service.EmployerService;
 import com.example.springsocial.service.JobService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class JobController {
+public class JobController{
 	
 	@Autowired
 	EmployerService employerService;
@@ -46,8 +39,10 @@ public class JobController {
 	@Autowired
 	JobService jobService;
 	
-
-    
+    @Autowired
+    private UserRepository userRepository;
+	
+/*    Old Method
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/job")
     public List<Job> getJobList() {
@@ -55,12 +50,25 @@ public class JobController {
         return jobService.getAllJobs();
         		//.orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
     }
-    
+  
+    */
+	
     @PreAuthorize("hasRole('USER')")
-	@PostMapping("/{employerId}/createJob")
-	public ResponseEntity<?> createJob(@PathVariable(value="employerId") Long employerId, @RequestBody CreateJobRequest createJobRequest){
+    @GetMapping("/{userId}/job")
+    public List<Job> getJobList(@PathVariable(value="userId") Long userId) {
+
+    	System.out.println("----------------------- /{userID}/job");
+
+        return jobService.getJobsByUserId(userId);
+        		//.orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
+    }
+	
+    @PreAuthorize("hasRole('USER')")
+	@PostMapping("/{userId}/{employerId}/createJob")
+	public ResponseEntity<?> createJob(@PathVariable(value="userId") Long userId, 
+			@PathVariable(value="employerId") Long employerId, @RequestBody CreateJobRequest createJobRequest){
 		
-    	Job job = jobService.createJob(employerId, createJobRequest);
+    	Job job = jobService.createJob(userId, employerId, createJobRequest);
     	
     	URI location = ServletUriComponentsBuilder
     			.fromCurrentRequest().path("getAllJobs")

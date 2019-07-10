@@ -66,7 +66,7 @@ class App extends Component {
   componentDidMount() {
     this.loadCurrentlyLoggedInUser();
     // this.loadJobLists();
-    console.log("App.js의 State 표시: " + this.state.jobLists);
+    console.log("App.js의 State 표시: " + this.state.currentUser);
   }
 
   render() {
@@ -74,22 +74,24 @@ class App extends Component {
       return <LoadingIndicator />
     }
     console.log("앱.js"+ this.state.authenticated);
+
     return (
       <div className="app">
         <div className="app-top-box">
-          <AppHeader authenticated={this.state.authenticated} onLogout={this.handleLogout} />
+          <AppHeader currentUserId ="1" authenticated={this.state.authenticated} onLogout={this.handleLogout} />
         </div>
         <div className="app-body">
           <Switch>
-            <Route exact path="/" component={Home}></Route>
+            <Route exact path="/" component={Home} ></Route>
             <PrivateRoute path="/profile" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
               component={Profile}></PrivateRoute>
 
             <PrivateRoute path="/job/createjob" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
               component={CreateJobComponent}> ></PrivateRoute>
-            <PrivateRoute path="/job" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
+            {/* <PrivateRoute path={`/api/${currentUserId}/job`} authenticated={this.state.authenticated} currentUser={this.state.currentUser}
+              component={JobListComponent}> ></PrivateRoute> */}
+            <PrivateRoute path={`/job`} authenticated={this.state.authenticated} currentUser={this.state.currentUser}
               component={JobListComponent}> ></PrivateRoute>
-
             <Route path="/login"
               render={(props) => <Login authenticated={this.state.authenticated} onLogin={this.loadCurrentlyLoggedInUser} {...props} />}></Route>
             <Route path="/signup"
