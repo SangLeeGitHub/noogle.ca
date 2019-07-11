@@ -29,7 +29,8 @@ class EmployerSearchComponent extends Component{
                             <input type='text' name='employerName'
                                 className='form-control' placeholder={`${"Employer's Name"}`}
                                 value={this.state.employerName}
-                                onChange={this.handleInputChange} required />
+                                required />
+                                {/* onChange={this.handleInputChange} required /> */}
                         </div>
                     </form>
 

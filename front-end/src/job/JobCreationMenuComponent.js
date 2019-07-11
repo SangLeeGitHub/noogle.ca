@@ -12,9 +12,9 @@ class JobCreationMenuComponent extends Component {
     return (
         <div className="jobheader">
             <NavLink exact to={`${currentPath}`} className="item" activeClassName="active">Step1. Search Employer</NavLink>
-            <NavLink to={`${currentPath}/createEmployer`} className="item" activeClassName="active">Step2. Add Employer</NavLink>
-            <NavLink to={`${currentPath}/createInterviewer`} className="item" activeClassName="active">Step3. Add Interviewer</NavLink>
-            <NavLink to={`${currentPath}/createNewJob`} className="item" activeClassName="active" >Step4.Add New Job</NavLink>
+            <NavLink exact to={`${currentPath}/createEmployer`} className="item" activeClassName="active">Step2. Add Employer</NavLink>
+            <NavLink exact to={`${currentPath}/createInterviewer`} className="item" activeClassName="active">Step3. Add Interviewer</NavLink>
+            <NavLink exact to={`${currentPath}/createNewJob`} className="item" activeClassName="active" >Step4.Add New Job</NavLink>
         </div>
     )}
 };

@@ -86,7 +86,7 @@ class App extends Component {
             <PrivateRoute path="/profile" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
               component={Profile}></PrivateRoute>
 
-            <PrivateRoute path="/job/job_createjob" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
+            <PrivateRoute path="/job/createjob" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
               component={CreateJobComponent}> ></PrivateRoute>
             {/* <PrivateRoute path={`/api/${currentUserId}/job`} authenticated={this.state.authenticated} currentUser={this.state.currentUser}
               component={JobListComponent}> ></PrivateRoute> */}

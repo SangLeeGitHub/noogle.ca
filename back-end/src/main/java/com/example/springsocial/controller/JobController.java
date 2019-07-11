@@ -74,6 +74,7 @@ public class JobController{
     			.fromCurrentRequest().path("getAllJobs")
     			.buildAndExpand(job.getJobId()).toUri();
 		    	
+    	
     	return ResponseEntity.created(location)
     			.body(new ApiResponse(true, "Job Created Successfully@"));
 	}

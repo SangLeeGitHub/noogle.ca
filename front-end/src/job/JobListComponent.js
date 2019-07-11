@@ -12,14 +12,14 @@ import {PinkButton} from '../app/App';
 
 class JobListComponent extends Component{
 
-    defaultProps = {
-        jobLists: 
-        [
-            {id: 110, description : 'Learn to Dance', position: "Software Developer 1", cId: 51, uId: 15, url: "http://www.askall.ca" , jobdate:""},
-            {id: 220, description : 'hello 2', position: "Tester 2", cId: 10, uId: 5, url: "http://www.askall.ca2" ,jobdate:""},
+    // defaultProps = {
+    //     jobLists: 
+    //     [
+    //         {id: 110, description : 'Learn to Dance', position: "Software Developer 1", cId: 51, uId: 15, url: "http://www.askall.ca" , jobdate:""},
+    //         {id: 220, description : 'hello 2', position: "Tester 2", cId: 10, uId: 5, url: "http://www.askall.ca2" ,jobdate:""},
 
-        ]
-    };
+    //     ]
+    // };
 
     constructor(props){
         super(props);
