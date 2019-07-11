@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Home.css';
-
+import MainSlideComponent from './MainSlideComponent'
 class Home extends Component {
     render() {
         return (
@@ -15,6 +15,9 @@ class Home extends Component {
                         </div>
                     </div>
                     <h1 className="home-title">NOOGLE.CA</h1>
+                </div>
+                <div>
+                    <MainSlideComponent />
                 </div>
             </div>
         )

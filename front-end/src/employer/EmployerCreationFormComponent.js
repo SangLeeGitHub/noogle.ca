@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {PinkButton} from '../app/App';
 import Alert from 'react-s-alert';
 import {createEmployer} from '../util/APIUtils';
+import {Link, withRouter, Switch, Route} from 'react-router-dom';
+import {InterviewerCreationFormComponent} from '.';
 
 
 
@@ -16,7 +18,7 @@ class EmployerCreationFormComponent extends Component{
             country: "",
             // interviewers: []
         }
-        console.log("JobCreationComponent.js의 Props 표시:  " + this.props.currentUser.uId);
+        console.log("EmployerCreationFormComponent.js의 Props 표시:  " + this.props.currentUser);
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,7 +43,7 @@ class EmployerCreationFormComponent extends Component{
         createEmployer(employerCreationRequest)
         .then(response => {
             Alert.success("A New Employer is successfully added.");
-            this.props.history.push("/job");
+            this.props.history.push("/job/createjob/createEmployer/createInterviewer");
             // this.props.history.push("/login");
         }).catch(error => {
             Alert.error(((error && error.message)) || 'Oops! Something went wrong. Please try again.');
@@ -50,6 +52,7 @@ class EmployerCreationFormComponent extends Component{
     
 
     render() {
+        const currentPath = `${this.props.match.url}`;
 
         return(
 
@@ -67,8 +70,6 @@ class EmployerCreationFormComponent extends Component{
                             onChange={this.handleInputChange} required />
                         </div>
                         <div className="form-item">
-                            {/* <p id="profile-name-hint" className="input-hint">
-                            Company Name: <samp>Amazon: 테스트할때는 숫자를 넣어주세요.</samp>. </p> */}
                             <input type="text" name="city" 
                                 className="form-control" placeholder="Waterloo"
                                 value={this.state.city} onChange={this.handleInputChange} required />
@@ -83,26 +84,21 @@ class EmployerCreationFormComponent extends Component{
                                 className="form-control" placeholder="Country"
                                 value={this.state.country} onChange={this.handleInputChange} />
                         </div>
-                        {/* <div className="form-item">
-                            <textarea type="text" name="description" 
-                                style={{resize: "none", height: "100px"}}
-                                className="form-control" placeholder="Job Description"
-                                value={this.state.description} onChange={this.handleInputChange} />
-                        </div> */}
-
-                        {/* <div className="form-item">
-                            <input type="text" name="uId" 
-                                className="form-control" placeholder={this.props.currentUser.id}
-                                value={this.state.uId} onChange={this.handleInputChange} disabled/>
-                        </div> */}
                         <div className="form-item">
-                            <PinkButton type="submit">Add an Employer</PinkButton>
+                            <PinkButton type="submit">Submit</PinkButton>
                         </div>
                     </form>
+
+                    <h3>Proceed to add a New Interviewer</h3>
+                    {/* <PinkButton component={Link} to={`${currentPath}/createInterviewer`}>Add New Interviewer</PinkButton> &nbsp;&nbsp; */}
+                    {/* <Switch>
+                        <Route exact path={`${currentPath}/createInterviewer`} currentUser={this.props.currentUser} {...this.props} component={InterviewerCreationFormComponent}></Route>
+                        <Route path={`${currentPath}/jobdetail/:jobId`} currentUser={this.props.currentUser} component={JobDetailComponent}></Route>
+                    </Switch> */}
             </div>
             </div>
         )
     };
 }
 
-export default EmployerCreationFormComponent;
+export default withRouter(EmployerCreationFormComponent);

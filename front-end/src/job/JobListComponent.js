@@ -71,8 +71,8 @@ class JobListComponent extends Component{
                     {currentPath}
                 </div>
                 <div>
-                    <PinkButton component={Link} to={`${currentPath}/jobdetail`}>Job Detail</PinkButton> &nbsp;&nbsp;
-                    <PinkButton component={Link} to={`${currentPath}/createjob`}>Create a new Job</PinkButton> &nbsp;&nbsp;
+                    <PinkButton currentUser={this.props.currentUser} {...this.props} component={Link} to={`${currentPath}/jobdetail`}>Job Detail</PinkButton> &nbsp;&nbsp;
+                    <PinkButton component={Link} to={`${currentPath}/createjob`}>Add a new Job</PinkButton> &nbsp;&nbsp;
                     <hr />
                 </div>
 
@@ -107,10 +107,6 @@ class JobListComponent extends Component{
                 <hr />
 
                 <Switch>
-                    {/* <Route exact path={`${currentPath}/createjob`}
-                        render={(props) => <CreateJobComponent  {...props} currentUser={this.props.currentUser} />} /> */}
-                    {/* <Route path={`${currentPath}`}
-                        render={(props) => <JobListComponent  {...props} currentUser={this.props.currentUser} />} /> */}
                     <Route exact path={`${currentPath}/jobdetail`} render={() => <div><h1>Job Details</h1></div>}></Route>
                     <Route path={`${currentPath}/jobdetail/:jobId`} currentUser={this.props.currentUser} component={JobDetailComponent}></Route>
                 </Switch>

@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {PinkButton} from '../app/App';
 import Alert from 'react-s-alert';
 import {createInterviewer} from '../util/APIUtils';
-
+import { JobCreationFormComponent } from '../job';
+import {Link, Switch, withRouter,Route} from 'react-router-dom';
 
 
 
@@ -18,7 +19,7 @@ class InterviewerCreationFormComponent extends Component{
             employerId: 2, //임시로 하드 코딩 this.props.employerId
             userId: 1 //임시로 하드코딩
         }
-        console.log("InterviewerCreationFormComponent.js의 Props 표시:  " + this.props.currentUser.uId);
+        console.log("IntemerviewerCreationFormComponent.js의 Props 표시:  " + this.props.currentUser);
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -53,7 +54,7 @@ class InterviewerCreationFormComponent extends Component{
     
 
     render() {
-
+        const currentPath = `${this.props.match.url}`;
         return(
 
             <div className="signup-container">
@@ -101,10 +102,12 @@ class InterviewerCreationFormComponent extends Component{
                             <PinkButton type="submit">Add an Interviewer</PinkButton>
                         </div>
                     </form>
+                    <PinkButton component={Link} to={`${currentPath}/createNewJob`}>Add New JOb</PinkButton> &nbsp;&nbsp;
+
             </div>
             </div>
         )
     };
 }
 
-export default InterviewerCreationFormComponent;
+export default withRouter(InterviewerCreationFormComponent);
