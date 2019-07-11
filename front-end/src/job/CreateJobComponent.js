@@ -10,12 +10,12 @@ import './JobMenu.css';
 class CreateJobComponent extends Component{
     constructor(props){
         super(props);    
-        this.setState({
+        this.state = {
             authenticated: props.authenticated,
             currentUser: props.currentUser,
-          });
+          };
 
-        console.log("CreateJobComponent.js의 Props 중 Authenticated 표시:  " + this.state.authenticated);
+        console.log("CreateJobComponent.js의 Props 중 표시:  " + this.state.authenticated);
     }
     render(){
         const currentPath = `${this.props.match.url}`;
