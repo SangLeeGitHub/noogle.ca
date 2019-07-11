@@ -12,10 +12,11 @@ class CreateJobComponent extends Component{
         super(props);    
         this.state = {
             authenticated: props.authenticated,
-            currentUser: props.currentUser,
+            // currentUser: props.currentUser,
           };
 
         console.log("CreateJobComponent.js의 Props 중 표시:  " + this.state.authenticated);
+        console.log("CreateJobComponent.js의 Props 중 userID 표시:  " + this.props.currentUser.id);
     }
     render(){
         const currentPath = `${this.props.match.url}`;
@@ -35,14 +36,18 @@ class CreateJobComponent extends Component{
                     </div>
                     <div>
                         <Switch>
-                            <Route exact path={`${currentPath}/`} component={EmployerSearchComponent} 
-                            authenticated={this.state.authenticated} currentUser={this.props.currentUser} {...this.props}></Route>
-                            <Route path={`${currentPath}/createEmployer`} currentUser={this.props.currentUser}
-                            authenticated={this.state.authenticated}  {...this.props} component={EmployerCreationFormComponent}></Route>
-                            <Route path={`${currentPath}/createInterviewer`} currentUser={this.props.currentUser}
-                            authenticated={this.state.authenticated}  {...this.props} component={InterviewerCreationFormComponent}></Route>
-                            <Route path={`${currentPath}/createNewJob`} currentUser={this.props.currentUser} 
-                            authenticated={this.state.authenticated} {...this.props} component={JobCreationFormComponent}></Route>
+                            <Route exact path={`${currentPath}/`} 
+                                component= {({props}) => <EmployerSearchComponent  currentUser={this.props.currentUser} {...props}/>}>
+                            </Route>
+                            <Route path={`${currentPath}/createEmployer`} 
+                                {...this.props} 
+                                render={(props) => <EmployerCreationFormComponent currentUser ={this.props.currentUser} {...props}/>}></Route>
+                            <Route path={`${currentPath}/createInterviewer`} 
+                                {...this.props} 
+                                render={(props) => <InterviewerCreationFormComponent currentUser ={this.props.currentUser} {...props}/>}></Route>
+                            <Route path={`${currentPath}/createNewJob`}  
+                                {...this.props} 
+                                render={(props) => <JobCreationFormComponent currentUser ={this.props.currentUser} {...props}/>}></Route>
                         </Switch>
                     </div>
                 </div>

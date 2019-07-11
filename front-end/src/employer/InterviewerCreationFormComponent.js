@@ -4,7 +4,7 @@ import Alert from 'react-s-alert';
 import {createInterviewer} from '../util/APIUtils';
 import { JobCreationFormComponent } from '../job';
 import {Link, Switch, withRouter,Route} from 'react-router-dom';
-
+import '../user/signup/Signup.css';
 
 
 class InterviewerCreationFormComponent extends Component{
@@ -45,7 +45,7 @@ class InterviewerCreationFormComponent extends Component{
         createInterviewer(this.state.employerId, interviewerCreationRequest)
         .then(response => {
             Alert.success("A New Interviewer is successfully added.");
-            this.props.history.push("/job/createjob");
+            this.props.history.push("/job/createjob/createNewJob");
             // this.props.history.push("/login");
         }).catch(error => {
             Alert.error(((error && error.message)) || 'Oops! Something went wrong. Please try again.');

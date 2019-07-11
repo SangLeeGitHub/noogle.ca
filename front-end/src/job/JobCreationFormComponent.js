@@ -52,45 +52,50 @@ class JobCreationFormComponent extends Component{
 
     render() {
 
-        return(
-            <div>
-                <h1>Add a New Job</h1>
-                <hr />
-                <form onSubmit={this.handleSubmit}>
-                    <div className='form-item'>
-                        <input type='text' name='position'
-                            className='form-control' placeholder='Job position'
-                            value={this.state.position}
-                            onChange={this.handleInputChange} required />
-                    </div>
-                    <div className="form-item">
-                        {/* <p id="profile-name-hint" className="input-hint">
+        return (
+
+            <div className="signup-container">
+                <div className="signup-content">
+                    <h1>Add a New Job</h1>
+                    <hr />
+                    <form onSubmit={this.handleSubmit}>
+                        <div className='form-item'>
+                            <input type='text' name='position'
+                                className='form-control' placeholder='Job position'
+                                value={this.state.position}
+                                onChange={this.handleInputChange} required />
+                        </div>
+                        <div className="form-item">
+                            {/* <p id="profile-name-hint" className="input-hint">
                             Company Name: <samp>Amazon: 테스트할때는 숫자를 넣어주세요.</samp>. </p> */}
-                        <input type="text" name=""
-                            className="form-control" placeholder="300"
-                            value={this.state.employerId} required />
-                    </div>
-                    <div className="form-item">
-                        <textarea type="text" name="description"
-                            style={{ resize: "none", height: "100px" }}
-                            className="form-control" placeholder="Job Description"
-                            value={this.state.description} onChange={this.handleInputChange} />
-                    </div>
-                    <div className="form-item">
-                        <input type="text" name="url"
-                            className="form-control" placeholder="URL - Job posting"
-                            value={this.state.url} onChange={this.handleInputChange} />
-                    </div>
-                    {/* <div className="form-item">
+                            <input type="text" name=""
+                                className="form-control" placeholder="300"
+                                value={this.state.employerId} required />
+                        </div>
+                        <div className="form-item">
+                            <textarea type="text" name="description"
+                                style={{ resize: "none", height: "100px" }}
+                                className="form-control" placeholder="Job Description"
+                                value={this.state.description} onChange={this.handleInputChange} />
+                        </div>
+                        <div className="form-item">
+                            <input type="text" name="url"
+                                className="form-control" placeholder="URL - Job posting"
+                                value={this.state.url} onChange={this.handleInputChange} />
+                        </div>
+                        {/* <div className="form-item">
                         <input type="text" name="uId"
                             className="form-control" placeholder={this.props.currentUser.id}
                             value={this.state.uId} onChange={this.handleInputChange} disabled />
                     </div> */}
-                    <div className="form-item">
-                        <PinkButton type="submit">Add a Job</PinkButton>
-                    </div>
-                </form>
+                        <div className="form-item">
+                            <PinkButton type="submit">Add a Job</PinkButton>
+                        </div>
+                    </form>
+                </div>
             </div>
+
+
         )
     };
 }
