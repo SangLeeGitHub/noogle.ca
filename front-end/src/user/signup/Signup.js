@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Signup.css';
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Redirect, withRouter } from 'react-router-dom'
 import { GOOGLE_AUTH_URL, FACEBOOK_AUTH_URL, GITHUB_AUTH_URL } from '../../constants';
 import { signup } from '../../util/APIUtils';
 import fbLogo from '../../img/fb-logo.png';
@@ -81,7 +81,7 @@ class SignupForm extends Component {
         signup(signUpRequest)
         .then(response => {
             Alert.success("You're successfully registered. Please login to continue!");
-            this.props.history.push("/login");
+            this.props.history.push("/profile");
         }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');            
         });
@@ -115,5 +115,5 @@ class SignupForm extends Component {
     }
 }
 
-export default Signup;
+export default withRouter(Signup);
 export {SignupForm} 

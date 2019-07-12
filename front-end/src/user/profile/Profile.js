@@ -56,7 +56,7 @@ class Profile extends Component {
                                 <Button  onClick = {this.updateModeClicked} className="modify" >Update </Button>
                                 {/* <PinkButton  onClick = {this.updateModeClicked} className="modify" >Update </PinkButton> */}
                                 {updateModeClicked && <UpdateProfile  
-                                                 {...this.props}></UpdateProfile>}
+                                             currentUser = {this.props.currentUser}    {...this.props}></UpdateProfile>}
                                 
                         </div>
                         
@@ -67,4 +67,4 @@ class Profile extends Component {
     }
 }
 
-export default Profile
+export default withRouter(Profile);

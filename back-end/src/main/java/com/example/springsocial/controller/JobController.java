@@ -48,13 +48,14 @@ public class JobController {
         		//.orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
     }
     
-    
-	@PostMapping("/createJob")
+    @PreAuthorize("hasRole('USER')")
+	@PostMapping("/createjob")
 	public ResponseEntity<?> registerJob(@Valid @RequestBody CreateJobRequest createJobRequest) {
 //	    if(jobRepository.existsByEmail(signUpRequest.getEmail())) {
 //	        throw new BadRequestException("Email address already in use.");
 //	    }
     	System.out.println("----------------------- /job/createJob");
+  
 
 	    // Creating job
 	    Job job = new Job();
@@ -68,7 +69,7 @@ public class JobController {
 	    Job result = jobRepository.save(job);
 
 	    URI location = ServletUriComponentsBuilder
-	            .fromCurrentContextPath().path("/job/jobList")
+	            .fromCurrentContextPath().path("/")
 	            .buildAndExpand(result.getJobId()).toUri();
 
 	    return ResponseEntity.created(location)

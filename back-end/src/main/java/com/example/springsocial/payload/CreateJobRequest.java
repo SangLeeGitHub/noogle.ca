@@ -2,6 +2,7 @@ package com.example.springsocial.payload;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by 
@@ -11,14 +12,14 @@ public class CreateJobRequest {
     @NotBlank
     private String position;
     
-    @NotBlank
+    @NotNull
     private Long cId;
         
     private String description;
     
     private String url;
     
-    @NotBlank
+    @NotNull
     private Long uId;
 
 	public String getPosition() {
