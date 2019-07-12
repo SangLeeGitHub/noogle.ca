@@ -18,7 +18,8 @@ class Signup extends Component {
                 state: { from: this.props.location }
             }}/>;            
         }
-
+        console.log("-- Signup.js의 prop.authenticated : "+ this.props.authenticated);
+        console.log(this.props);
         return (
             <div className="signup-container">
                 <div className="signup-content">
@@ -27,7 +28,7 @@ class Signup extends Component {
                     <div className="or-separator">
                         <span className="or-text">OR</span>
                     </div>
-                    <SignupForm {...this.props} />
+                    <SignupForm  {...this.props}/>
                     <span className="login-link">Already have an account? <Link to="/login">Login!</Link></span>
                 </div>
             </div>
@@ -38,6 +39,7 @@ class Signup extends Component {
 
 class SocialSignup extends Component {
     render() {
+        //console.log(this.props);
         return (
             <div className="social-signup">
                 <a className="btn btn-block social-btn google" href={GOOGLE_AUTH_URL}>
@@ -59,6 +61,7 @@ class SignupForm extends Component {
             email: '',
             password: ''
         }
+        console.log(props);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -70,24 +73,30 @@ class SignupForm extends Component {
 
         this.setState({
             [inputName] : inputValue
-        });        
+        });       
+        //console.log("inputValue in the handleSInputChange : "+  inputValue); 
     }
 
     handleSubmit(event) {
         event.preventDefault();   
-
+        //console.log("this.state in the handleSubmit : "+  this.state);
         const signUpRequest = Object.assign({}, this.state);
 
         signup(signUpRequest)
         .then(response => {
-            Alert.success("You're successfully registered. Please login to continue!");
+            // Alert.success("You're successfully registered. Please login to continue!");
+            console.log("before push to profile ");
+            //this.props.authenticated = true;
             this.props.history.push("/profile");
+            console.log("after push to profile ");
+            console.log(this.props);
         }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');            
         });
     }
 
     render() {
+        //console.log(this.props);
         return (
             <form onSubmit={this.handleSubmit}>
                 <div className="form-item">

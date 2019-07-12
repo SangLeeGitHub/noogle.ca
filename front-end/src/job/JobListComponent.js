@@ -12,76 +12,68 @@ import {PinkButton} from '../app/App';
 
 class JobListComponent extends Component{
 
-    defaultProps = {
-        jobLists: 
-        [
-            {id: 110, description : 'Learn to Dance', position: "Software Developer 1", cId: 51, uId: 15, url: "http://www.askall.ca" , jobdate:""},
-            {id: 220, description : 'hello 2', position: "Tester 2", cId: 10, uId: 5, url: "http://www.askall.ca2" ,jobdate:""},
-
-        ]
-    };
+    // defaultProps = {
+    //     jobLists:
+    //     [
+    //         {id: 110, description : 'Learn to Dance', position: "Software Developer 1", cId: 51, uId: 15, url: "http://www.askall.ca" , jobdate:""},
+    //         {id: 220, description : 'hello 2', position: "Tester 2", cId: 10, uId: 5, url: "http://www.askall.ca2" ,jobdate:""},
+    //     ]    
+    // };
 
     constructor(props){
         super(props);
         this.state = {
             jobLists: 
             [
-                {jobId: 10, description : 'Learn to Dance', position: "Software Developer 1", cId: 51, uId: 15, url: "http://www.askall.ca" , jobdate:""},
-                {jobId: 20, description : 'hello 2', position: "Tester 2", cId: 10, uId: 6, url: "http://www.askall.ca2" ,jobdate:""},
-                {jobId: 30, description : '접니다 3', position: "Developer 3", cId: 10, uId: 15, url: "http://www.askall.ca3" ,jobdate:""},
-                {jobId: 40, description : '나여~ 4', position: "Embedded Developer 4", cId: 21, uId: 6, url: "http://www.askall.ca4" ,jobdate:""},
-                {jobId: 50, description : '저라니깨여 5', position: "App Developer 5", cId: 31, uId: 35, url: "http://www.askall.ca5" ,jobdate:""}
-            ] 
+                // {createdAt: "2019-07-09T18:33:33Z", position: "Game Developer 5", description : 'From Default State 2',  employer_name: "Samsung", uId: 35, url: "http://www.askall.ca5"}
+            ]
         };
     };
 
-    loadJobLists(){
-        const {jobLists} = this.state;   
-        getJobLists()
-        .then(response => {
-          this.setState({
-            jobLists: response.concat(...jobLists),
-          });
-        }).catch(error => {
-            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
-          });
-      }
-
-      componentDidMount() {
+    componentDidMount() {
         this.loadJobLists();
-        console.log("JobListComponent.js의 State 표시: " + this.state.jobLists);
-      }
+        //console.log("JobListComponent.js State: " + this.state.jobLists);
+    }
+
+    loadJobLists(){
+        const {jobLists} = this.state;
+
+        getJobLists(this.props.currentUser.id)
+        .then(response => {
+            this.setState({jobLists: response.concat(...jobLists),
+            });
+        }).catch(error => {
+            Alert.error((error && error.message ) || 'Oops! Something went wrong. Please try again!');
+        });
+    }
     
     render(){
 
-        
-        // const currentPath = this.props.match.url;
         const currentPath = `${this.props.match.url}`;
         const jobLists = this.state.jobLists;
 
-        console.log("currentPath:", currentPath);
-
+        console.log("currentPath: ", currentPath);
+        console.log("jobLists: ", jobLists);
         return(
             <div className="signup-container">
                 <div>
-                    <h1>{this.props.currentUser.name}'s Job Lists</h1>
+                    <h1>{this.props.currentUser.name}'s Job List</h1>
                     {currentPath}
                 </div>
                 <div>
-                    <PinkButton component={Link} to={`${currentPath}/jobdetail`}>Job Detail</PinkButton> &nbsp;&nbsp;
-                    <PinkButton component={Link} to={`${currentPath}/createjob`}>Create a new Job</PinkButton> &nbsp;&nbsp;
-                    <hr />
+                    <PinkButton component={Link} to={`${currentPath}/jobDetail`}>Job Details</PinkButton>&nbsp;&nbsp;&nbsp;
+                    <PinkButton component={Link} to={`${currentPath}/createjob`}>Add a new Job</PinkButton>
                 </div>
-
+                <hr />
 
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>Job ID</th>
+                            {/* <th>Date Created</th> */}
                             <th>Position</th>
                             <th>Company Name</th>
                             <th>Job Description</th>
-                            <th>User ID</th>
+                            {/* <th>User ID</th> */}
                             <th>URL</th>
                         </tr>
                     </thead>
@@ -89,32 +81,33 @@ class JobListComponent extends Component{
                         {jobLists.map(
                             job =>
                                 <tr key={job.jobId}>
-                                    <td>{job.jobId}</td>
+                                    {/* <td>{job.createdAt}</td> */}
                                     <td>{job.position}</td>
-                                    <td>{job.cId}</td>
+                                    <td>{job.companyName}</td>
+                                    <td>{job.description}</td>
+                                    {/* <td>{job.uId}</td> */}
+                                    <td>{job.url}</td>
+                                </tr>
+                        )}
+                    </tbody>
+                    {/* <tbody>
+                        {jobLists.map(
+                            job =>
+                                <tr key={job.jobId}>
+                                    <td>{job.createdAt}</td>
+                                    <td>{job.position}</td>
+                                    <td>{job.employer_name}</td>
                                     <td>{job.description}</td>
                                     <td>{job.uId}</td>
                                     <td>{job.url}</td>
                                 </tr>
                         )}
-
-                    </tbody>
+                    </tbody> */}
                 </table>
 
-                <hr />
-
                 <Switch>
-                    {/* <Route exact path={`${currentPath}/createjob`}
-                        render={(props) => <CreateJobComponent  {...props} currentUser={this.props.currentUser} />} /> */}
-                    {/* <Route path={`${currentPath}`}
-                        render={(props) => <JobListComponent  {...props} currentUser={this.props.currentUser} />} /> */}
-                    <Route exact path={`${currentPath}/jobdetail`} render={() => <div><h1>Job Details</h1></div>}></Route>
-                    <Route path={`${currentPath}/jobdetail/:jobId`} currentUser={this.props.currentUser} component={JobDetailComponent}></Route>
+                    <Route exact path={`${currentPath}/jobDetail`} render={()=><div><h1>Job Details</h1></div>}></Route>
                 </Switch>
-
-
-
-
             </div>
         );
     }

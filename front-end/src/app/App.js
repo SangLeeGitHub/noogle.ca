@@ -31,14 +31,21 @@ class App extends Component {
 
     this.loadCurrentlyLoggedInUser = this.loadCurrentlyLoggedInUser.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.changeAuthenticated = this.changeAuthenticated.bind(this);
     // this.loadJobLists = this.loadJobLists.bind(this);
+  }
+
+  changeAuthenticated(authenFromChild){
+    if(authenFromChild){
+      this.state.authenticated = true;
+    }
   }
 
   loadCurrentlyLoggedInUser() {
     this.setState({
       loading: true
     });
-
+    console.log("-- inside the function of loadCurrentlyLoggedInUser");
     getCurrentUser()
         .then(response => {
           this.setState({
@@ -66,14 +73,17 @@ class App extends Component {
   componentDidMount() {
     this.loadCurrentlyLoggedInUser();
     // this.loadJobLists();
-    console.log("App.js의 State 표시: " + this.state.jobLists);
+    //console.log("App.js의 JobLists State : " + this.state.jobLists);
   }
 
   render() {
     if(this.state.loading) {
       return <LoadingIndicator />
     }
-    console.log("앱.js"+ this.state.authenticated);
+    console.log("App.js의 authenticated : "+ this.state.authenticated);
+    console.log("App.js의 currentUser : "+ this.state.currentUser);
+    console.log("App.js의 loading : "+ this.state.loading);
+    console.log("call turn : 1 - App.js");
     return (
       <div className="app">
         <div className="app-top-box">
@@ -85,15 +95,15 @@ class App extends Component {
             <PrivateRoute path="/profile" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
               component={Profile}></PrivateRoute>
 
-            <PrivateRoute path="/job/createjob" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
-              component={CreateJobComponent}> ></PrivateRoute>
             <PrivateRoute path="/job" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
               component={JobListComponent}> ></PrivateRoute>
+            <PrivateRoute path="/createJob" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
+              component={CreateJobComponent}> ></PrivateRoute>
 
             <Route path="/login"
               render={(props) => <Login authenticated={this.state.authenticated} onLogin={this.loadCurrentlyLoggedInUser} {...props} />}></Route>
             <Route path="/signup"
-              render={(props) => <Signup authenticated={this.state.authenticated} {...props} />}></Route>
+              render={(props) => <Signup onChangeAuth = {this.changeAuthenticated} authenticated={this.state.authenticated} {...props} />}></Route>
             <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}></Route>
             <Route component={NotFound}></Route>
           </Switch>

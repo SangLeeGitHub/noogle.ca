@@ -4,7 +4,7 @@ import {
     Redirect
   } from "react-router-dom";
   
-  
+//console.log(" -- proivateRoute authenticated " + this.props.authenticated).bind(this);
 const PrivateRoute = ({ component: Component, authenticated, ...rest }) => (
     <Route
       {...rest}
@@ -22,5 +22,6 @@ const PrivateRoute = ({ component: Component, authenticated, ...rest }) => (
       }
     />
 );
+console.log("call turn : 3 - PrivateRoute.js");
   
 export default PrivateRoute

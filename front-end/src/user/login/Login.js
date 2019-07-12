@@ -27,6 +27,8 @@ class Login extends Component {
     }
 
     render() {
+        console.log("this.props.authenticated value in Login : " + 
+        this.props.authenticated);
         if (this.props.authenticated) {
             return <Redirect
                 to={{
@@ -96,9 +98,12 @@ class LoginForm extends Component {
         login(loginRequest)
         .then(response => {
             localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+            console.log("Before push to / in Login.js");
             this.props.history.push("/");
+            console.log("After push to / in Login.js");
             this.props.onLogin();
-            setTimeout(function () { Alert.success("You're successfully logged in!") }, 300);
+            //setTimeout(function () { Alert.success("You're successfully logged in!") }, 300);
+            setTimeout( () => { Alert.success("You're successfully logged in!") }, 300);
         }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
         });

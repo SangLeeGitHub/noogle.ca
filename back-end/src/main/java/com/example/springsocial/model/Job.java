@@ -16,18 +16,21 @@ public class Job {
 
     @Column(nullable = false)
     private String position;
-
+    
     @Column(nullable = false)
-    private Long cId;
+    private String companyName;
+
+//    @Column(nullable = false)
+//    private Long cId;
     
     @Column(nullable = true)
-    private String description;
+    private String jobDescription;
 
     @Column(nullable = true)
     private String url;
     
-    @Column(nullable = false)
-    private Long uId;
+//    @Column(nullable = false)
+//    private Long uId;
 
 	public Long getJobId() {
 		return jobId;
@@ -45,20 +48,20 @@ public class Job {
 		this.position = position;
 	}
 
-	public Long getcId() {
-		return cId;
-	}
-
-	public void setcId(Long cId) {
-		this.cId = cId;
-	}
+//	public Long getcId() {
+//		return cId;
+//	}
+//
+//	public void setcId(Long cId) {
+//		this.cId = cId;
+//	}
 
 	public String getDescription() {
-		return description;
+		return jobDescription;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescription(String jobDescription) {
+		this.jobDescription = jobDescription;
 	}
 
 	public String getUrl() {
@@ -68,13 +71,21 @@ public class Job {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-    
-	public Long getuId() {
-		return uId;
+
+	public String getCompanyName() {
+		return companyName;
 	}
 
-	public void setuId(Long uId) {
-		this.uId = uId;
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
     
+//	public Long getuId() {
+//		return uId;
+//	}
+//
+//	public void setuId(Long uId) {
+//		this.uId = uId;
+//	}
+//    
 }

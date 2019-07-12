@@ -3,6 +3,7 @@ import './Home.css';
 
 class Home extends Component {
     render() {
+        console.log("-- Home.js");
         return (
             <div className="home-container">
                 <div className="container">

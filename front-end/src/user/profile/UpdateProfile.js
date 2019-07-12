@@ -3,48 +3,49 @@ import {withRouter} from 'react-router-dom';
 import {updateInfo } from '../../util/APIUtils';
 import Alert from 'react-s-alert';
 import { PinkButton } from "../../app/App";
+
 class UpdateProfile extends Component{
     constructor(props) {
         super(props);
-        console.log("from Constructor of UpdateProfile: " + props);
+        console.log("name in UpdateProfile : " + this.props.currentUser.name);
+        console.log("email in UpdateProfile : " + this.props.currentUser.email);
+        console.log("password in UpdateProfile : " + this.props.currentUser.password);
+        //this.updateProfile = this.updateProfile.bind(this);
+
     }
+
+    // updateProfile(){
+    //     this.props.update(this.state);
+    // }
 
     render(){
         return(
-
-            <div>
-                <div>
-                    <h1>Update User Information</h1>
+            <div className="login-container">
+                <div className="login-content">
+                    <h1 className="login-title">Update User Information</h1>
+                    <div className="or-separator">Please modify detail Information to Update.
+                    </div>
+                    <UpdateForm {...this.props} />
+                    {/* <UpdateForm {...this.props} update={this.updateProfile}/> */}
                 </div>
-                <div>
-                <h3>Please modify detail Information to Update.</h3>
-
-                    {console.log("updatedProfile: " +this.props.currentUser.email)}
-                
-                    {/* <p className="profile-email">{this.props.currentUser.email}</p> */}
-                </div>
-                <div>
-                    <UpdateForm currentUser= {this.props.currentUser} {...this.props} />
-                </div>
-            </div>
+            </div>            
+    
         );
     }
 }
 
-class UpdateForm extends Component {
+class UpdateForm extends Component{
     constructor(props) {
         super(props);
         this.state = {
             name: '',
             email: '',
             password: '',
-            currentUser: props.currentUser
-        }
+            //currentUser: props.currentUser
+        };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        console.log(this.props.currentUser.name);
     }
-
 
     handleInputChange(event) {
         const target = event.target;
@@ -57,80 +58,58 @@ class UpdateForm extends Component {
     }
 
     handleSubmit(event) {
-        event.preventDefault();   
+        event.preventDefault();
 
         const updateRequest = Object.assign({}, this.state);
 
-        updateInfo(updateRequest)  //this mothod is declared in APIUtils
+        updateInfo(updateRequest)
         .then(response => {
-            Alert.success("Information is successfully updated. Enjoy!");
+            //localStorage.setItem(ACCESS_TOKEN, response.accessToken);
             this.setState({
-                name:  this.state.name,
+                name: this.state.name,
                 email: this.state.email,
                 password: this.state.password
-            })
-            this.props.history.replace("/login");
+            });
+            // this.props.update(this.state);
+            console.log("Before push to /login in UpdateProfile.js");
+            this.props.history.push("/login");
+            console.log("After push to /login in UpdateProfile.js");
+            //this.props.onLogin();
+            //setTimeout(function () { Alert.success("You're successfully logged in!") }, 300);
+
+            Alert.success("Your profile's successfully updated!");
+            // setTimeout( () => { Alert.success("Your profile's successfully updated!") }, 300);
         }).catch(error => {
-            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');            
+            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
         });
     }
-     
-    // static getDerivedStateFromProps(nextProps, prevState) {
-    //     // 여기서는 setState 를 하는 것이 아니라
-    //     // 특정 props 가 바뀔 때 설정하고 설정하고 싶은 state 값을 리턴하는 형태로
-    //     // 사용됩니다.
-        
-    //     if (nextProps.currentUser !== prevState.currentUser) {
-    //         return { currentUser: nextProps.currentUser };
-    //     //   return this.props.history.push("/login");;
-    //     }
-    //     return null; // null 을 리턴하면 따로 업데이트 할 것은 없다라는 의미
-        
-    //   }
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     this.props.history.replace("/profile");
-    //     return true;
-    // }
-
+    
     render() {
         return (
-            
-            <form onSubmit={this.handleSubmit} id = "updateForm">
+            <form onSubmit={this.handleSubmit}>
                 <div className="form-item">
-                    <div>
-                    {console.log(this.props.currentUser.name)}
-                        <label>User Name: &nbsp;&nbsp;</label>
-                        <p id="profile-name-hint"
-                                class="input-hint">
-                                Can be found on your detail profile information.
-                                Example: <samp>EricJJang</samp>.
-                            </p>
-                        <input  type="text" name="name"
-                            className="form-control" placeholder={this.props.currentUser.name}
-                            value={this.state.name} onChange={this.handleInputChange} required />
-                    </div>
+                {console.log("currentUser name in the render in UpdateProfile :" + this.props.currentUser.name)}
+                <label>User Name: &nbsp;&nbsp;</label>
+                    <input type="text" name="name" 
+                        className="form-control" placeholder={this.props.currentUser.name}
+                        value={this.state.name} onChange={this.handleInputChange} required/>
                 </div>
                 <div className="form-item">
-                    <div>
-                        <label>Email: &nbsp;&nbsp;</label>
-                        <input type="email" name="email" 
-                            className="form-control" placeholder={this.props.currentUser.email}
-                            value={this.state.email} onChange={this.handleInputChange} required/>
-                    </div>
-                    
+                <label>Email: &nbsp;&nbsp;</label>
+                    <input type="text" name="email" 
+                        className="form-control" placeholder={this.props.currentUser.email}
+                        value={this.state.email} onChange={this.handleInputChange} required/>
                 </div>
                 <div className="form-item">
-                    <label>Password: &nbsp;&nbsp;</label>
-                    <input type="password" name="password" 
+                <label>Password: &nbsp;&nbsp;</label>
+                    <input type="text" name="password" 
                         className="form-control" placeholder="Password"
                         value={this.state.password} onChange={this.handleInputChange} required/>
                 </div>
                 <div className="form-item">
-                    <PinkButton type="submit">Apply</PinkButton>
+                    <PinkButton type="submit">Update</PinkButton>
                 </div>
-                
             </form>                    
-
         );
     }
 }

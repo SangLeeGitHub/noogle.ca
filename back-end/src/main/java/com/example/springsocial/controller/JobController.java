@@ -61,10 +61,10 @@ public class JobController {
 	    Job job = new Job();
 	    
 	    job.setPosition(createJobRequest.getPosition());
-	    job.setcId(createJobRequest.getcId());
+//	    job.setcId(createJobRequest.getcId());
 	    job.setDescription(createJobRequest.getDescription());
 	    job.setUrl(createJobRequest.getUrl());
-	    job.setuId(createJobRequest.getuId());
+//	    job.setuId(createJobRequest.getuId());
 	    
 	    Job result = jobRepository.save(job);
 

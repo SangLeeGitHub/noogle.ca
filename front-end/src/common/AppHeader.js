@@ -12,6 +12,7 @@ class AppHeader extends Component {
         const style2 = {
             "background-color": "#000000"
         };
+        console.log("-- AppHeader.js의 prop.authenticated : "+ this.props.authenticated);
         return (
 
                 <header className="app-header">
