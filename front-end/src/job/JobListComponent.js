@@ -12,27 +12,14 @@ import {PinkButton} from '../app/App';
 
 class JobListComponent extends Component{
 
-    // defaultProps = {
-    //     jobLists: 
-    //     [
-    //         {id: 110, description : 'Learn to Dance', position: "Software Developer 1", cId: 51, uId: 15, url: "http://www.askall.ca" , jobdate:""},
-    //         {id: 220, description : 'hello 2', position: "Tester 2", cId: 10, uId: 5, url: "http://www.askall.ca2" ,jobdate:""},
-
-    //     ]
-    // };
-
     constructor(props){
         super(props);
         this.state = {
             jobLists: 
             [
-                // {jobId: 10, description : 'Learn to Dance', position: "Software Developer 1", cId: 51, uId: 15, url: "http://www.askall.ca" , jobdate:""},
-                // {jobId: 20, description : 'hello 2', position: "Tester 2", cId: 10, uId: 6, url: "http://www.askall.ca2" ,jobdate:""},
-                // {jobId: 30, description : '접니다 3', position: "Developer 3", cId: 10, uId: 15, url: "http://www.askall.ca3" ,jobdate:""},
-                // {jobId: 40, description : '나여~ 4', position: "Embedded Developer 4", cId: 21, uId: 6, url: "http://www.askall.ca4" ,jobdate:""},
-                
-                {createdAt: "2019-07-08T18:33:33Z", position: "App Developer 5", description : 'Default State 1',  employer_name: "LGE", url: "http://www.askall.ca5"},
-                {createdAt: "2019-07-09T18:33:33Z", position: "Game Developer 5", description : 'From Default State 2',  employer_name: "Samsung", url: "http://www.askall.ca5"}
+
+                {createdAt: "2019-07-08T18:33:33Z", position: "App Developer 5", description : 'Default State 1',  employer_name: "LGE", url: "http://www.askall.ca5", jobId: 11},
+                {createdAt: "2019-07-09T18:33:33Z", position: "Game Developer 5", description : 'From Default State 2',  employer_name: "Samsung", url: "http://www.askall.ca5", jobId: 21}
             ] 
         };
     };
@@ -43,7 +30,7 @@ class JobListComponent extends Component{
         getJobLists(this.props.currentUser.id)
         .then(response => {
           this.setState({
-            jobLists: response.concat(...jobLists),
+            jobLists: response  //.concat(jobLists),
           });
         }).catch(error => {
             Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');

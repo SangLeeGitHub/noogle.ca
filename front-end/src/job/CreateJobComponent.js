@@ -37,7 +37,7 @@ class CreateJobComponent extends Component{
                     <div>
                         <Switch>
                             <Route exact path={`${currentPath}/`} 
-                                component= {({props}) => <EmployerSearchComponent  currentUser={this.props.currentUser} {...props}/>}>
+                                render= {({props}) => <EmployerSearchComponent  currentUser={this.props.currentUser} {...props}/>}>
                             </Route>
                             <Route path={`${currentPath}/createEmployer`} 
                                 {...this.props} 

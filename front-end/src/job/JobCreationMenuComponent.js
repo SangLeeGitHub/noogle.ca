@@ -3,10 +3,10 @@ import {NavLink,withRouter} from 'react-router-dom';
 import './JobMenu.css';
 
 class JobCreationMenuComponent extends Component {
-    constructor(props){
-        super(props);
+    // constructor(props){
+    //     super(props);
 
-    }
+    // }
     render(){
     const currentPath = this.props.match.url;
     return (
