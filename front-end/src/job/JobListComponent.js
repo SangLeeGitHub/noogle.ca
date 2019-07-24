@@ -23,6 +23,7 @@ class JobListComponent extends Component{
             ] 
         };
     };
+  
 
     loadJobLists(){
         const {jobLists} = this.state;
@@ -44,6 +45,7 @@ class JobListComponent extends Component{
     
     render(){
 
+ 
         
         // const currentPath = this.props.match.url;
         const currentPath = `${this.props.match.url}`;
@@ -63,7 +65,7 @@ class JobListComponent extends Component{
                     <hr />
                 </div>
 
-
+    
                 <table className="table">
                     <thead>
                         <tr>

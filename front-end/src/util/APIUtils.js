@@ -103,9 +103,9 @@ export function createInterviewer(employerId ,interviewerCreationRequest){
 //user 마다 회사를 달리 등록할 것인가, 그 안의 interviewer를 통합으로 다 보게 해줄 것인가, 자기 등록한 것만 보여주게 할 것인가...(후자가 낫다)
 //그렇게 하기 위해서는, Model에 다시 User를 등록해줘야 하지 않나?
 export function searchEmployer(employerName){
-    console.log(employerName);
+    // console.log(employerName);
     return request({
-        url: API_BASE_URL + "/api/searchInterviewer",
+        url: API_BASE_URL + "/api/employer/" + employerName,
         method: 'GET',
     })
 }

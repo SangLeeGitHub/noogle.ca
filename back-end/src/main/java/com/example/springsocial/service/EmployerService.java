@@ -27,6 +27,11 @@ public class EmployerService {
 		return employerRepository.findById(employerId).get();
 	}
 	
+	public List<Employer> getEmployersByName(String employerName){
+		return employerRepository.findByEmployerName(employerName);
+	}
+	
+	
 	public Employer createEmployer(CreateEmployerRequest createEmployerRequest) {
 		
 		Employer employer = new Employer();

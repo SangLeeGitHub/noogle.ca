@@ -107,4 +107,9 @@ public class EmployerInterviewerController {
 	}
 	
 	
+	@GetMapping("/employer/{employerName}")
+	public List<Employer> getEmployerByName(@PathVariable(value="employerName") String employerName){
+		return employerService.getEmployersByName(employerName);
+	}
+	
 }
