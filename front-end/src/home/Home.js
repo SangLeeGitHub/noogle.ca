@@ -5,7 +5,7 @@ class Home extends Component {
     render() {
         return (
             <div className="home-container">
-                <div className="container">
+                {/* <div className="container">
                     <div className="graf-bg-container">
                         <div className="graf-layout">
                             <div className="graf-circle"></div>
@@ -15,7 +15,7 @@ class Home extends Component {
                         </div>
                     </div>
                     <h1 className="home-title">NOOGLE.CA</h1>
-                </div>
+                </div> */}
                 <div>
                     <MainSlideComponent />
                 </div>

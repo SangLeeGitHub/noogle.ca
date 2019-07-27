@@ -34,11 +34,27 @@ class EmployerSearchComponent extends Component{
         const interviewerCreationRequest = Object.assign({},  this.state); //{uId: this.props.currentUser.i},
         searchEmployer(this.state.employerName)
         .then(response => {
-            Alert.success("Found employer(s) successfully.");
-            this.setState({
-                employers: response,
-                isEmployPresent: true
-            })
+            if(response.length === 0){
+                Alert.success("No employer(s) Found.");
+                this.setState({
+                    isEmployPresent: false
+                });
+                                // this.props.history.replace("/job/createjob");
+                // return <h1>No Employer Found.</h1>;
+                console.log("데이터 없어유~");
+                this.searchInput.focus();
+                this.searchInput.select();
+
+            }
+            else{
+                Alert.success("Employer(s) found successfully.");
+                this.setState({
+                    employers: response,
+                    isEmployPresent: true
+                });
+                console.log("자료가 있네요~");
+            }
+ 
             //this.props.history.push("/job/createjob/createEmployer");
             
             // this.props.history.push("/login");
@@ -47,6 +63,9 @@ class EmployerSearchComponent extends Component{
         });   
     };
 
+    componentDidMount(){
+        this.searchInput.focus();
+    }
     render(){
         console.log(this.state.employers);
         const currentPath = `${this.props.match.url}`;
@@ -58,7 +77,9 @@ class EmployerSearchComponent extends Component{
                     <h5>Please search an employer first, before registration.</h5>
                     <form onSubmit={this.handleSubmit}>
                         <div className='form-item'>
-                            <input type='text' name='employerName'
+                            <input
+                                ref = {(input) => {this.searchInput = input}} 
+                                type='text' name='employerName'
                                 className='form-control' placeholder={`${"Employer's Name"}`}
                                 value={this.state.employerName}
                                 onChange={this.handleInputChange} required />
@@ -68,11 +89,14 @@ class EmployerSearchComponent extends Component{
                             <PinkButton component={Link} to={`${currentPath}/createEmployer`}>Next Step</PinkButton> &nbsp;&nbsp;
                          </div>
                     </form>
-                    <hr />
+        
+                    {!this.state.isEmployPresent ?
+                        <div></div> : 
                     <div>
+                        <hr />
                         <EmployerListsComponent allEmployers={this.state.employers}/>
                     </div>
-                    
+                    }
                     
                 </div>
                 {/* <div>

@@ -11,6 +11,7 @@ class EmployerListsComponent extends Component{
     render(){
         const employerLists = this.props.allEmployers;
         return(
+
             <div>
                 <h1>Employers Found</h1>
                 <div className="container">
@@ -30,7 +31,7 @@ class EmployerListsComponent extends Component{
                                     <td>{employer.name}</td>
                                     <td>{employer.city}</td>
                                     <td>{employer.province}</td>
-                                    <thd>{employer.country}</thd>
+                                    <td>{employer.country}</td>
                                 </tr>
                             )}
                         </tbody>
