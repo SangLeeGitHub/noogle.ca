@@ -55,11 +55,12 @@ public class Job extends UserDateAudit implements Serializable{
 		return user;
 	}
 
-	@JsonIgnore
+	@JsonIgnore //avoid infinite loop
 	public void setUser(User user) {
 		this.user = user;
 	}
 
+	
 
 	public void setJobId(Long jobId) {
 		this.jobId = jobId;
