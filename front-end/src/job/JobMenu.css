@@ -1,3 +1,7 @@
+.job{
+    padding-top: 100px;
+}
+
 .jobheader{
     background: hsl(56, 63%, 80%);
     display: table;

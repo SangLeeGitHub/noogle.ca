@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
 import './Home.css';
+// import '../common/AppHeader.css';
+import Welcome from './Welcome'
 import MainSlideComponent from './MainSlideComponent'
+
 class Home extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            currentUserId: this.props.currentUserId
+        }
+    }
     render() {
         return (
-            <div className="home-container">
-                {/* <div className="container">
-                    <div className="graf-bg-container">
-                        <div className="graf-layout">
-                            <div className="graf-circle"></div>
-                            <div className="graf-circle"></div>
-                            <div className="graf-circle"></div>
-                            <div className="graf-circle"></div>
-                        </div>
-                    </div>
-                    <h1 className="home-title">NOOGLE.CA</h1>
-                </div> */}
-                <div>
-                    <MainSlideComponent />
+            <div>
+                 <div>
+                     {this.props.authenticated ? (
+                         <Welcome />
+                     ) : (
+                        <MainSlideComponent />
+                     )}
+
                 </div>
             </div>
         )

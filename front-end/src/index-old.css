@@ -37,12 +37,12 @@ body {
   padding-right: 15px; 
 }
 
-@media screen and (min-width: 1200px) {
+/* @media screen and (min-width: 1200px) {
   .container {
     padding-left: 30px;
     padding-right: 30px;
   }
-}
+} */
 
 /**
   Link

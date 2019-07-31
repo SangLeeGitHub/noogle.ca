@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link, Route, withRouter,Switch} from 'react-router-dom';
 import '../user/signup/Signup.css';
+import './JobMenu.css';
 import PrivateRoute from '../common/PrivateRoute';
 import {CreateJobComponent, JobDetailComponent} from '.';
 import {getJobLists,getCurrentUser } from '../util/APIUtils';
@@ -54,7 +55,8 @@ class JobListComponent extends Component{
         console.log("currentPath:", currentPath);
 
         return(
-            <div className="signup-container">
+            // <div className="signup-container">
+            <div className="job">
                 <div>
                     <h1>{this.props.currentUser.name}'s Job Lists</h1>
                     {currentPath}

@@ -13,9 +13,9 @@ a {
     color: inherit;
 }
 
-body {
+/* body {
     background-color: #222;
-}
+} */
 
 .clearfix::after {
     content: ' ';

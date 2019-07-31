@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Route, Switch, withRouter} from 'react-router-dom';
 import AppHeader from '../common/AppHeader';
+import Footer from '../common/Footer';
 import Home from '../home/Home';
 import Login from '../user/login/Login';
 import Signup from '../user/signup/Signup';
@@ -76,13 +77,13 @@ class App extends Component {
     console.log("앱.js"+ this.state.authenticated);
 
     return (
-      <div className="app">
-        <div className="app-top-box">
+      <div >
+        <div >
           <AppHeader currentUserId ="1" authenticated={this.state.authenticated} onLogout={this.handleLogout} />
         </div>
-        <div className="app-body">
+        <div >
           <Switch>
-            <Route exact path="/" component={Home} ></Route>
+            <Route exact path="/" authenticated={this.state.authenticated} component={Home} ></Route>
             <PrivateRoute path="/profile" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
               component={Profile}></PrivateRoute>
 
@@ -99,6 +100,9 @@ class App extends Component {
             <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}></Route>
             <Route component={NotFound}></Route>
           </Switch>
+        </div>
+        <div>
+          <Footer />
         </div>
         <Alert stack={{limit: 3}} 
           timeout = {3000}

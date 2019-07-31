@@ -1,0 +1,223 @@
+
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab|Shadows+Into+Light&display=swap');
+
+html, body, ul, h2, h1, dl, dd, dt, a, span {
+    margin:0;
+    padding: 0;
+    /* width: 100%;
+    height: 100%; */
+}
+
+li {
+    list-style-type: none;
+}
+
+body {
+    /* background-color: #6e9fdf; */
+    background-color: #ddd;
+    color: #666;
+    text-align: center;
+}
+
+.cover {
+    background-image: url(../img/gotjob.jpg);
+    color: aliceblue;
+    padding-top: 20%;
+    padding-bottom: 10%;
+
+    background-size: cover;
+    background-position: center;
+    transition: padding .5s;
+    position: relative;
+}
+
+.cover-title{
+    font-size: 7vw;
+    padding-top: 1em;
+    /* padding-bottom: 1em; */
+    font-weight: normal;
+    font-family: 'Shadows Into Light', cursive;
+    line-height: 1;
+    font-style: italic;
+    transition: font-size .5s;
+}
+
+.cover-title span {
+    font-size: 2rem;
+    display: block;
+    font-family: 'arial';
+    /* text-indent: 3em; */
+    padding-top: 1.5rem;
+}
+
+.wrapper{
+    padding: 0 20px;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+
+.main-content-item{
+    margin-top: 70px;
+}
+
+.card{
+    background-color: rgba(0,0,0,0.3);
+    color: #999;
+    padding: 0 20px 20px 20px;
+    border-radius: 30px;
+}
+
+
+
+.card-icon{
+    width: 300px;
+    height: auto;
+    vertical-align: top;
+    position: relative;
+}
+
+.card-title{
+    font-size: 4vw;
+    color: yellow;
+    font-family: 'arial';
+    line-height: 1;
+    margin: 20px;
+    /* position: relative; */
+}
+
+.card-definition{
+    margin: 20px;
+}
+
+.card-definition dt{
+    font-size: 25px;
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+.card-definition dd {
+
+}
+
+
+.col-sm-6 {
+    /* width: 100%; */
+    padding: 2px;
+}
+
+
+
+
+
+.padding {
+    padding: 10px;
+    width: 100%;
+    background-color:#212c4d;
+}
+
+
+.padding:nth-child(odd){
+    background-color: #fff;
+    padding: 5px;
+}
+.container{
+
+}
+
+.padding img {
+    width: 85%;
+    border-radius: 3px;
+    margin-top: 10%;
+
+}
+
+
+/* .row{
+    max-width: 1368px;
+
+} */
+.main-content{
+    padding: 3%;
+    text-align: justify;
+}
+
+
+.row h3{
+    font-style: italic, bold;
+}
+
+.row mid-image{
+    width: 90%;
+}
+
+.fixed {
+    background: url(../img/rockymountain.jpg) no-repeat center center fixed;
+    display: table;
+    height: 60%;
+    position: relative ;
+    width: 100%;
+    background-size: cover;
+    padding-top: 5%;
+    padding-bottom: 15%;
+    transition: padding .5s;
+}
+
+@media(min-width: 768px){
+    .cover{
+        padding-top: 10%;
+        padding-bottom: 5%;
+        width: 100%;
+        transition: all 1s;
+
+    }
+
+    .padding-large{
+        /* margin-top: 10px; */
+        /* padding: 30px 0px; */
+        padding: 0px;
+        transition: all .5s;
+
+    }
+
+    .padding {
+        transition: all .5s;
+    }
+    /* .padding img {
+        width: 85%;
+    } */
+
+    .cover-title{
+        font-size: 5vw;
+    }
+
+    .fixed{
+        height: 100%;
+
+        padding-bottom: 15%;
+        transition: all .5s;
+   
+    } 
+    /* .col-sm-6{
+        font-size: 2vw;
+        text-align: center;
+    } */
+
+    /* .col-sm-6 p{
+        font-size: 1vw;
+        text-align: auto;
+    } */
+    .row h3{
+        font-style: italic bold;
+    }
+
+    .row mid-image{
+        width: 100%;
+    }
+/* 
+    .row p{
+        text-align: auto;
+    } */
+    
+}
+
