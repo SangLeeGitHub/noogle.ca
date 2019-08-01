@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '../user/signup/Signup.css';
 
-class JobDetailComponent extends Component{
+class JobDetail extends Component{
 
     render(){
 
@@ -15,4 +15,4 @@ class JobDetailComponent extends Component{
     }
 }
 
-export default JobDetailComponent;
+export default JobDetail;

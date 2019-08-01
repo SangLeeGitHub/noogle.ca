@@ -22,6 +22,6 @@ const PrivateRoute = ({ component: Component, authenticated, ...rest }) => (
       }
     />
 );
-console.log("call turn : 3 - PrivateRoute.js");
+console.log("call PrivateRoute.js");
   
 export default PrivateRoute

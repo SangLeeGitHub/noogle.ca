@@ -6,13 +6,14 @@ import { PinkButton } from '../app/App.js'
 class AppHeader extends Component {
 
     render() {
-        const style1 = {
-            "background-color": "#ffffff"
-        };
-        const style2 = {
-            "background-color": "#000000"
-        };
-        console.log("-- AppHeader.js의 prop.authenticated : "+ this.props.authenticated);
+        // const style1 = {
+        //     "background-color": "#ffffff"
+        // };
+        // const style2 = {
+        //     "background-color": "#000000"
+        // };
+        console.log("Call AppHeader.js");
+        console.log("-- prop.authenticated in AppHeader.js: "+ this.props.authenticated);
         return (
 
                 <header className="app-header">

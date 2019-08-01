@@ -17,7 +17,7 @@ import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 import './App.css';
 import { styled } from "@material-ui/styles";
 import { Button } from "@material-ui/core";
-import {JobListComponent, CreateJobComponent} from '../job';
+import {JobList, CreateJob} from '../job';
 
 class App extends Component {
 
@@ -37,7 +37,10 @@ class App extends Component {
 
   changeAuthenticated(authenFromChild){
     if(authenFromChild){
-      this.state.authenticated = true;
+      //this.state.authenticated = true;
+      this.setState(
+        this.authenticated = true
+      )
     }
   }
 
@@ -45,7 +48,7 @@ class App extends Component {
     this.setState({
       loading: true
     });
-    console.log("-- inside the function of loadCurrentlyLoggedInUser");
+    //console.log("-- loadCurrentlyLoggedInUser");
     getCurrentUser()
         .then(response => {
           this.setState({
@@ -80,10 +83,10 @@ class App extends Component {
     if(this.state.loading) {
       return <LoadingIndicator />
     }
-    console.log("App.js의 authenticated : "+ this.state.authenticated);
-    console.log("App.js의 currentUser : "+ this.state.currentUser);
-    console.log("App.js의 loading : "+ this.state.loading);
-    console.log("call turn : 1 - App.js");
+    console.log("Call App.js");
+    console.log("-- authenticated in App.js : "+ this.state.authenticated);
+    console.log("-- currentUser in App.js: "+ this.state.currentUser);
+    console.log("-- loading in App.js: "+ this.state.loading);
     return (
       <div className="app">
         <div className="app-top-box">
@@ -95,10 +98,9 @@ class App extends Component {
             <PrivateRoute path="/profile" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
               component={Profile}></PrivateRoute>
 
-            <PrivateRoute path="/job" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
-              component={JobListComponent}> ></PrivateRoute>
-            <PrivateRoute path="/createJob" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
-              component={CreateJobComponent}> ></PrivateRoute>
+            <PrivateRoute exact path="/job" authenticated={this.state.authenticated} currentUser={this.state.currentUser}
+              component={JobList}> ></PrivateRoute>
+            <PrivateRoute path="/job/createjob" authenticated={this.state.authenticated} currentUser={this.state.currentUser} component={CreateJob}> ></PrivateRoute>
 
             <Route path="/login"
               render={(props) => <Login authenticated={this.state.authenticated} onLogin={this.loadCurrentlyLoggedInUser} {...props} />}></Route>

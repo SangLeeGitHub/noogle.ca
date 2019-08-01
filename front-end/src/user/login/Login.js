@@ -105,7 +105,7 @@ class LoginForm extends Component {
             //setTimeout(function () { Alert.success("You're successfully logged in!") }, 300);
             setTimeout( () => { Alert.success("You're successfully logged in!") }, 300);
         }).catch(error => {
-            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+            Alert.error(error && error.message);
         });
     }
     

@@ -35,13 +35,13 @@ export function getCurrentUser() {
     });
 }
 
-export function getJobLists(){
+export function getJobLists(userId){
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
     }
 
     return request({
-        url: API_BASE_URL + "/job",
+        url: API_BASE_URL + "/api/" + userId + "/job",
         method: 'GET'
     });
 }
@@ -70,11 +70,55 @@ export function updateInfo(updateRequest) {
     });
 }
 
-export function createJob(jobCreationRequest){
-    console.log(jobCreationRequest);
+// export function createJob(jobCreationRequest){
+//     console.log(jobCreationRequest);
+//     return request({
+//         url: API_BASE_URL + "/job/createjob",
+//         method: 'POST',
+//         body: JSON.stringify(jobCreationRequest)
+//     });
+// }    
+
+export function searchEmployer(employerName){
+    console.log(employerName);
+
     return request({
-        url: API_BASE_URL + "/job/createjob",
-        method: 'POST',
-        body: JSON.stringify(jobCreationRequest)
+        url: API_BASE_URL + "/api/searchEmployer/"+ employerName,
+        method: 'GET',
     });
+
+    // return request({
+    //     url: API_BASE_URL + "/job/createjob",
+    //     method: 'POST',
+    //     body: JSON.stringify(jobCreationRequest)
+    // });
+    
 }
+
+export function addEmployer(addEmployerRequest){
+    console.log(addEmployerRequest);
+    return request({
+        url: API_BASE_URL + "/api/addEmployer",
+        method: 'POST',
+        body: JSON.stringify(addEmployerRequest)
+    });
+}    
+
+export function addInterviewer(employerId, addInterviewerRequest){
+    console.log(addInterviewerRequest);
+    return request({
+        url: API_BASE_URL + "/api/" + employerId + "/addInterviewer",
+        method: 'POST',
+        body: JSON.stringify(addInterviewerRequest)
+    });
+}    
+
+
+export function addNewJob(userId, employerId, addNewJobRequest){
+    console.log(addNewJobRequest);
+    return request({
+        url: API_BASE_URL + "/api/" + userId + "/" + employerId + "/addNewJob",
+        method: 'POST',
+        body: JSON.stringify(addNewJobRequest)
+    });
+}    

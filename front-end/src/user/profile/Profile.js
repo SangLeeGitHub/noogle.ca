@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Profile.css';
-import PinkButton from '../../app/App';
-import {Link, Route,NavLink, Switch, withRouter} from 'react-router-dom';
+//import PinkButton from '../../app/App';
+import {withRouter} from 'react-router-dom';
 import UpdateProfile from './UpdateProfile';
 import { Button } from "@material-ui/core";
 import PrivateRoute from '../../common/PrivateRoute';

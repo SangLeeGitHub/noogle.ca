@@ -4,8 +4,8 @@
 
 // export {JobListComponent, JobDetailComponent,CreateJobComponent} ;
 
-export {default as JobDetailComponent} from './JobDetailComponent';
-export {default as JobListComponent} from './JobListComponent';
-export {default as CreateJobComponent} from './CreateJobComponent';
-export {default as JobCreationFormComponet} from './CreateJobComponent';
+export {default as JobDetail} from './JobDetail';
+export {default as JobList} from './JobList';
+export {default as CreateJob} from './CreateJob';
+export {default as JobCreationForm} from './CreateJob';
 // export {default as Job} from './Job';
