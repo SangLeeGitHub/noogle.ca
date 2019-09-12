@@ -5,6 +5,10 @@ import { PinkButton } from '../app/App.js'
 
 class AppHeader extends Component {
 
+    a = function () {
+
+    };
+
     render() {
         const style1 = {
             "background-color": "#ffffff"
