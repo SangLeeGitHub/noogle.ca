@@ -1,15 +1,18 @@
 package com.example.springsocial.model;
+import com.example.springsocial.model.audit.UserDateAudit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "job", uniqueConstraints = {
         @UniqueConstraint(columnNames = "jobId")
 })
-public class Job {
+public class Job extends UserDateAudit implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long jobId;
@@ -17,8 +20,8 @@ public class Job {
     @Column(nullable = false)
     private String position;
 
-    @Column(nullable = false)
-    private Long cId;
+//    @Column(nullable = false)
+//    private Long cId;
     
     @Column(nullable = true)
     private String description;
@@ -26,8 +29,26 @@ public class Job {
     @Column(nullable = true)
     private String url;
     
-    @Column(nullable = false)
-    private Long uId;
+//    @Column(nullable = false)
+//    private Long uId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="employerId", nullable= false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Employer employer;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="userId", nullable = false)
+    private User user;
+    
+	public Employer getEmployer() {
+		return employer;
+	}
+
+	@JsonIgnore
+	public void setEmployer(Employer employer) {
+		this.employer = employer;
+	}
 
 	public Long getJobId() {
 		return jobId;
@@ -45,13 +66,13 @@ public class Job {
 		this.position = position;
 	}
 
-	public Long getcId() {
-		return cId;
-	}
-
-	public void setcId(Long cId) {
-		this.cId = cId;
-	}
+//	public Long getcId() {
+//		return cId;
+//	}
+//
+//	public void setcId(Long cId) {
+//		this.cId = cId;
+//	}
 
 	public String getDescription() {
 		return description;
@@ -69,12 +90,23 @@ public class Job {
 		this.url = url;
 	}
     
-	public Long getuId() {
-		return uId;
+//	public Long getuId() {
+//		return uId;
+//	}
+//
+//	public void setuId(Long uId) {
+//		this.uId = uId;
+//	}
+
+	public User getUser() {
+		return user;
 	}
 
-	public void setuId(Long uId) {
-		this.uId = uId;
+	@JsonIgnore
+	public void setUser(User user) {
+		this.user = user;
 	}
+	
+	
     
 }

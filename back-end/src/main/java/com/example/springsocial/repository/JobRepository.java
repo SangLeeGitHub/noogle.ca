@@ -14,7 +14,7 @@ public interface JobRepository extends JpaRepository<Job, Long> {
     
     Optional<Job> findById(Long id);
     
-    // Boolean existsByEmail(String email);
+    List<Job> findByUserId(Long id);
 
 }
 
